@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="3600">
+<title>صفحة المراقبة — أبرج</title>
+<style>
+:root{--navy:#102A5C;--orange:#F28C28;--bg:#F6F1E7;--card:#fff;--line:#E4DCCB;--muted:#6B7280}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#1f2937;font-family:'Tajawal','Segoe UI',Tahoma,Arial,sans-serif;line-height:1.7}
+header{background:var(--navy);color:#fff;border-bottom:5px solid var(--orange)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+.hdr{display:flex;align-items:center;gap:20px;padding:22px 20px;flex-wrap:wrap}
+.logo{background:#fff;border-radius:12px;padding:8px 14px;display:flex}
+.logo img{height:56px;display:block}
+h1{margin:0;font-size:1.9rem}
+.subtitle{margin:4px 0 0;opacity:.9;font-size:.98rem}
+.upd{margin-inline-start:auto;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:8px 14px;font-size:.9rem}
+.upd b{color:var(--orange)}
+section{margin:30px 0}
+h2{color:var(--navy);font-size:1.45rem;margin:0 0 6px;padding-inline-start:12px;border-inline-start:5px solid var(--orange)}
+.lead{color:var(--muted);margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 2px 8px rgba(16,42,92,.06);display:flex;flex-direction:column;gap:8px}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card h3{margin:0;color:var(--navy);font-size:1.1rem}
+.city{background:#EEF2F9;color:var(--navy);border-radius:999px;padding:2px 10px;font-size:.8rem;white-space:nowrap}
+.desc{margin:0;font-size:.93rem}
+.links{list-style:none;margin:0;padding:0;font-size:.86rem}
+.links li{padding:2px 0;border-bottom:1px dashed #eee;overflow-wrap:anywhere}
+a{color:#1d4ed8;text-decoration:none} a:hover{text-decoration:underline}
+.na{color:#9ca3af}
+.act{display:flex;flex-direction:column;gap:4px;margin-top:auto}
+.pill{align-self:flex-start;border-radius:999px;padding:2px 12px;font-weight:700;font-size:.85rem;background:#e5e7eb;color:#374151}
+.pill.hi{background:#DCFCE7;color:#166534} .pill.mid{background:#FEF3C7;color:#92400E} .pill.lo{background:#FEE2E2;color:#991B1B}
+.metrics{font-size:.82rem;color:var(--muted)}
+.meta{font-size:.76rem;color:var(--muted);border-top:1px solid #f0ebe0;padding-top:6px}
+.badge{display:inline-block;background:var(--orange);color:#fff;font-size:.72rem;font-weight:700;border-radius:6px;padding:1px 8px;vertical-align:middle}
+.tbl{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 8px rgba(16,42,92,.06)}
+table{border-collapse:collapse;width:100%;min-width:1100px;font-size:.88rem}
+th{background:var(--navy);color:#fff;text-align:right;padding:10px;position:sticky;top:0}
+td{padding:10px;border-top:1px solid #eee7d8;vertical-align:top}
+tr:nth-child(even) td{background:#FCFAF5}
+.num{color:var(--muted);text-align:center}
+.sub,.sig{font-size:.78rem;color:var(--muted)}
+.sig{color:#B45309}
+.ltr{direction:ltr;text-align:right;white-space:nowrap}
+.notes{max-width:340px;font-size:.8rem}
+.src a{margin-inline-end:4px;white-space:nowrap}
+.legend{font-size:.84rem;color:var(--muted);margin:8px 0 0}
+footer{background:var(--navy);color:#dbe3f3;text-align:center;padding:18px;font-size:.86rem;margin-top:40px}
+@media(max-width:640px){h1{font-size:1.45rem}.upd{margin-inline-start:0}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap hdr">
+  <div class="logo"><img src="data:image/png;base64,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" alt="أبرج"></div>
+  <div><h1>صفحة المراقبة</h1><p class="subtitle">مراقبة المنافسين والعملاء المحتملين لمؤسسة أبرج للإنشاءات المتكاملة — الخبر والدمام · 29 أكتوبر 2026</p></div>
+  <div class="upd">آخر تحديث: <b dir="ltr">2026-10-29</b></div>
+</div></header>
+<main class="wrap">
+<section>
+  <h2>المنافسون — نفس نشاط أبرج (الخبر والدمام)</h2>
+  <p class="lead">شركات فيت أوت وتشطيبات وتسليم مفتاح للمطاعم والمقاهي والمحلات. الروابط مذكورة فقط إذا تم التحقق منها من مصدر حقيقي، وكل رقم غير قابل للتحقق مكتوب «غير متاح».</p>
+  <div class="grid"><article class="card">
+  <div class="card-head"><h3>Adzone | شركة النطاق الإضافي للتصميم <span class="badge">تحديث</span></h3><span class="city">الخبر (حي البستان)</span></div>
+  <p class="desc">استوديو تصميم معماري وداخلي مع إشراف وتنفيذ وتسليم مفتاح؛ أعمال مقاهٍ ومطاعم كثيرة في الخبر (Chemistry Gardens، Ouden، Equal، BlackKnight، Abla).</p>
+  <ul class="links"><li><b>الموقع:</b> <a href="https://www.adzone.com.sa/" target="_blank" rel="noopener">adzone.com.sa</a></li><li><b>إنستغرام:</b> <a href="https://www.instagram.com/adzone_design/" target="_blank" rel="noopener">instagram.com/adzone_design</a></li><li><b>تيك توك:</b> <span class="na">غير متاح</span></li><li><b>فيسبوك:</b> <span class="na">غير متاح</span></li><li><b>لينكدإن:</b> <a href="https://www.linkedin.com/company/adzone-designing-co" target="_blank" rel="noopener">linkedin.com/company/adzone-designing-co</a></li></ul>
+  <div class="act"><span class="pill hi">النشاط: مرتفع</span><span class="metrics">إنستغرام: 366K متابع · 122 منشور. لينكدإن: ~2,618 متابع. آخر نشاط: غير متاح. (الموقع لم يستجب من جهازنا وقت التحقق لكنه مفهرس في البحث)</span></div>
+  <div class="meta">تم التحقق في: <bdi dir="ltr">2026-10-29</bdi> · أول ظهور: <bdi dir="ltr">2026-10-29</bdi> · آخر تغيير: <bdi dir="ltr">2026-10-29</bdi></div>
+</article><article class="card">
+  <div class="card-head"><h3>حداثة للديكور والتشطيبات (Hadatha) <span class="badge">تحديث</span></h3><span class="city">الأحساء — فرق دائمة في الدمام والخبر</span></div>
+  <p class="desc">فيت أوت تجاري للمطاعم والمقاهي والمكاتب: تصميم وتنفيذ وتوريد، مدير مشروع واحد، تنفيذ 4–10 أسابيع.</p>
+  <ul class="links"><li><b>الموقع:</b> <a href="https://hadatha.sa/" target="_blank" rel="noopener">hadatha.sa</a></li><li><b>إنستغرام:</b> <a href="https://www.instagram.com/hadatha.sa" target="_blank" rel="noopener">instagram.com/hadatha.sa</a></li><li><b>تيك توك:</b> <a href="https://www.tiktok.com/@hadatha..sa" target="_blank" rel="noopener">tiktok.com/@hadatha..sa</a></li><li><b>فيسبوك:</b> <a href="https://www.facebook.com/share/18d7rmzo15/" target="_blank" rel="noopener">facebook.com/share/18d7rmzo15</a></li></ul>
+  <div class="act"><span class="pill hi">النشاط: مرتفع</span><span class="metrics">إنستغرام: 13K متابع · 714 منشور. تيك توك: 1,133 متابع · 123 فيديو · 11.4K إعجاب. آخر نشاط: غير متاح</span></div>
+  <div class="meta">تم التحقق في: <bdi dir="ltr">2026-10-29</bdi> · أول ظهور: <bdi dir="ltr">2026-10-29</bdi> · آخر تغيير: <bdi dir="ltr">2026-10-29</bdi></div>
+</article><article class="card">
+  <div class="card-head"><h3>MADE Design Studio <span class="badge">تحديث</span></h3><span class="city">الخبر (الراكة) — الظهران — الدمام</span></div>
+  <p class="desc">تصميم داخلي وفيت أوت فاخر مع نجارة وأثاث داخلي وتنفيذ تسليم مفتاح؛ يشمل المطاعم والمقاهي والمحلات.</p>
+  <ul class="links"><li><b>الموقع:</b> <a href="https://made-sa.co/en" target="_blank" rel="noopener">made-sa.co/en</a></li><li><b>إنستغرام:</b> <a href="https://www.instagram.com/made.design.co/" target="_blank" rel="noopener">instagram.com/made.design.co</a></li><li><b>تيك توك:</b> <a href="https://www.tiktok.com/@made.design.co" target="_blank" rel="noopener">tiktok.com/@made.design.co</a></li><li><b>فيسبوك:</b> <span class="na">غير متاح</span></li><li><b>لينكدإن:</b> <a href="https://www.linkedin.com/company/made-design-studio-interior-design-fit-out" target="_blank" rel="noopener">linkedin.com/company/made-design-studio-interior-design-fit-out</a></li></ul>
+  <div class="act"><span class="pill mid">النشاط: متوسط</span><span class="metrics">إنستغرام: 6,415 متابع · 463 منشور. تيك توك: 193 متابع · 93 فيديو · 1,156 إعجاب. آخر نشاط: غير متاح</span></div>
+  <div class="meta">تم التحقق في: <bdi dir="ltr">2026-10-29</bdi> · أول ظهور: <bdi dir="ltr">2026-10-29</bdi> · آخر تغيير: <bdi dir="ltr">2026-10-29</bdi></div>
+</article><article class="card">
+  <div class="card-head"><h3>BIKAR للتصميم والتنفيذ (BIKAR Design &amp; Build) <span class="badge">تحديث</span></h3><span class="city">الخبر</span></div>
+  <p class="desc">تصميم داخلي وتنفيذ تشطيبات متكاملة منذ 2017؛ منافس مباشر في المقاهي والمطاعم (DeFlore، Orenda، KOPI، LMK، Tenderloin، Dose الرياض).</p>
+  <ul class="links"><li><b>الموقع:</b> <span class="na">غير متاح</span></li><li><b>إنستغرام:</b> <a href="https://www.instagram.com/bikarksa/" target="_blank" rel="noopener">instagram.com/bikarksa</a></li><li><b>تيك توك:</b> <span class="na">غير متاح</span></li><li><b>فيسبوك:</b> <span class="na">غير متاح</span></li><li><b>Behance:</b> <a href="https://www.behance.net/bikarinter15d0" target="_blank" rel="noopener">behance.net/bikarinter15d0</a></li><li><b>ملف Soor:</b> <a href="https://soordb.com/en/bikarinteriors" target="_blank" rel="noopener">soordb.com/en/bikarinteriors</a></li></ul>
+  <div class="act"><span class="pill mid">النشاط: متوسط</span><span class="metrics">إنستغرام: 5,181 متابع · 633 منشور. Behance: 26 متابع · 1,477 مشاهدة. الموقع الرسمي: غير متاح. آخر نشاط: مشاريع مؤرخة 2026 على Soor</span></div>
+  <div class="meta">تم التحقق في: <bdi dir="ltr">2026-10-29</bdi> · أول ظهور: <bdi dir="ltr">2026-10-29</bdi> · آخر تغيير: <bdi dir="ltr">2026-10-29</bdi></div>
+</article><article class="card">
+  <div class="card-head"><h3>makan.design <span class="badge">تحديث</span></h3><span class="city">الدمام (شارع عثمان بن عفان، ابن خلدون)</span></div>
+  <p class="desc">تصميم وتنفيذ داخلي تسليم مفتاح (Design &amp; Build) للشركات والضيافة والسكني، بعقد واحد وجدول كميات مثبت.</p>
+  <ul class="links"><li><b>الموقع:</b> <a href="https://www.makan.design/" target="_blank" rel="noopener">makan.design</a></li><li><b>إنستغرام:</b> <a href="https://www.instagram.com/makandotdesign/" target="_blank" rel="noopener">instagram.com/makandotdesign</a></li><li><b>تيك توك:</b> <span class="na">غير متاح</span></li><li><b>فيسبوك:</b> <span class="na">غير متاح</span></li><li><b>لينكدإن:</b> <a href="https://www.linkedin.com/company/makandotdesign" target="_blank" rel="noopener">linkedin.com/company/makandotdesign</a></li></ul>
+  <div class="act"><span class="pill mid">النشاط: متوسط</span><span class="metrics">إنستغرام: 1,276 متابع · 309 منشور. آخر نشاط: غير متاح</span></div>
+  <div class="meta">تم التحقق في: <bdi dir="ltr">2026-10-29</bdi> · أول ظهور: <bdi dir="ltr">2026-10-29</bdi> · آخر تغيير: <bdi dir="ltr">2026-10-29</bdi></div>
+</article><article class="card">
+  <div class="card-head"><h3>جبتك GYPTECH <span class="badge">تحديث</span></h3><span class="city">الدمام (مصنع) — الخبر (برج سهمية)</span></div>
+  <p class="desc">تصنيع وتركيب أنظمة داخلية للمطاعم والمقاهي: أسقف وجدران صوتية، أسطح طاولات ومقاعد، حمامات — منافس جزئي/مورد محتمل.</p>
+  <ul class="links"><li><b>الموقع:</b> <a href="https://gyptech.com.sa/" target="_blank" rel="noopener">gyptech.com.sa</a></li><li><b>إنستغرام:</b> <a href="https://www.instagram.com/gyptech_sa/" target="_blank" rel="noopener">instagram.com/gyptech_sa</a></li><li><b>تيك توك:</b> <span class="na">غير متاح</span></li><li><b>فيسبوك:</b> <a href="https://www.facebook.com/profile.php?id=61550510170242" target="_blank" rel="noopener">facebook.com/profile.php?id=61550510170242</a></li><li><b>لينكدإن:</b> <a href="https://www.linkedin.com/company/gyptech-sa/" target="_blank" rel="noopener">linkedin.com/company/gyptech-sa/</a></li></ul>
+  <div class="act"><span class="pill lo">النشاط: منخفض</span><span class="metrics">إنستغرام: 315 متابع · 203 منشور. آخر نشاط: غير متاح</span></div>
+  <div class="meta">تم التحقق في: <bdi dir="ltr">2026-10-29</bdi> · أول ظهور: <bdi dir="ltr">2026-10-29</bdi> · آخر تغيير: <bdi dir="ltr">2026-10-29</bdi></div>
+</article><article class="card">
+  <div class="card-head"><h3>تناسق البناء Tanasog Al Bina <span class="badge">تحديث</span></h3><span class="city">الخبر</span></div>
+  <p class="desc">مقاول فيت أوت (تصميم وتنفيذ) للمكاتب وصالات العرض في الخبر والدمام، مع إدارة المقاولين الباطن والتسليم.</p>
+  <ul class="links"><li><b>الموقع:</b> <a href="https://tanasog.com/" target="_blank" rel="noopener">tanasog.com</a></li><li><b>إنستغرام:</b> <a href="https://www.instagram.com/tanasog.fitout" target="_blank" rel="noopener">instagram.com/tanasog.fitout</a></li><li><b>تيك توك:</b> <span class="na">غير متاح</span></li><li><b>فيسبوك:</b> <span class="na">غير متاح</span></li><li><b>لينكدإن:</b> <a href="https://www.linkedin.com/company/tanasog" target="_blank" rel="noopener">linkedin.com/company/tanasog</a></li></ul>
+  <div class="act"><span class="pill lo">النشاط: منخفض</span><span class="metrics">إنستغرام: 31 متابع · 30 منشور. آخر نشاط: غير متاح</span></div>
+  <div class="meta">تم التحقق في: <bdi dir="ltr">2026-10-29</bdi> · أول ظهور: <bdi dir="ltr">2026-10-29</bdi> · آخر تغيير: <bdi dir="ltr">2026-10-29</bdi></div>
+</article><article class="card">
+  <div class="card-head"><h3>THTS — Total Hospitality Technical Solutions <span class="badge">تحديث</span></h3><span class="city">الدمام والخبر (ضمن فروع بالمملكة)</span></div>
+  <p class="desc">تشطيب مطاعم وتجزئة ومكاتب تسليم مفتاح، نجارة، وتوريد وتركيب معدات المطابخ التجارية وصيانتها بعقد واحد.</p>
+  <ul class="links"><li><b>الموقع:</b> <a href="https://www.thts.co/ar/dammam-khobar.html" target="_blank" rel="noopener">thts.co/ar/dammam-khobar.html</a></li><li><b>إنستغرام:</b> <span class="na">غير متاح</span></li><li><b>تيك توك:</b> <span class="na">غير متاح</span></li><li><b>فيسبوك:</b> <span class="na">غير متاح</span></li></ul>
+  <div class="act"><span class="pill na">النشاط: غير متاح</span><span class="metrics">لا حسابات تواصل اجتماعي مذكورة في الموقع</span></div>
+  <div class="meta">تم التحقق في: <bdi dir="ltr">2026-10-29</bdi> · أول ظهور: <bdi dir="ltr">2026-10-29</bdi> · آخر تغيير: <bdi dir="ltr">2026-10-29</bdi></div>
+</article><article class="card">
+  <div class="card-head"><h3>ديزينيشن Designation <span class="badge">تحديث</span></h3><span class="city">الخبر (صناعية الثقبة)</span></div>
+  <p class="desc">أعمال خشبية فاخرة، تصميم داخلي، فيت أوت تسليم مفتاح، ومقاولات عامة؛ يشمل المطاعم والمقاهي والمعارض (Folk، Hixagone، Wekad).</p>
+  <ul class="links"><li><b>الموقع:</b> <a href="https://designation-sa.com/index-ar.html" target="_blank" rel="noopener">designation-sa.com/index-ar.html</a></li><li><b>إنستغرام:</b> <span class="na">غير متاح</span></li><li><b>تيك توك:</b> <span class="na">غير متاح</span></li><li><b>فيسبوك:</b> <span class="na">غير متاح</span></li></ul>
+  <div class="act"><span class="pill na">النشاط: غير متاح</span><span class="metrics">لا حسابات تواصل اجتماعي مذكورة في الموقع (واتساب فقط)</span></div>
+  <div class="meta">تم التحقق في: <bdi dir="ltr">2026-10-29</bdi> · أول ظهور: <bdi dir="ltr">2026-10-29</bdi> · آخر تغيير: <bdi dir="ltr">2026-10-29</bdi></div>
+</article><article class="card">
+  <div class="card-head"><h3>مقاول الشرقية <span class="badge">تحديث</span></h3><span class="city">الدمام والخبر</span></div>
+  <p class="desc">مقاولات عامة وترميم وتشطيب، وتصميم وتنفيذ مطاعم وكافيهات ومحلات تجارية.</p>
+  <ul class="links"><li><b>الموقع:</b> <a href="https://contractor-sa.com/" target="_blank" rel="noopener">contractor-sa.com</a></li><li><b>إنستغرام:</b> <span class="na">غير متاح</span></li><li><b>تيك توك:</b> <span class="na">غير متاح</span></li><li><b>فيسبوك:</b> <span class="na">غير متاح</span></li></ul>
+  <div class="act"><span class="pill na">النشاط: غير متاح</span><span class="metrics">لا حسابات تواصل اجتماعي مذكورة في الموقع</span></div>
+  <div class="meta">تم التحقق في: <bdi dir="ltr">2026-10-29</bdi> · أول ظهور: <bdi dir="ltr">2026-10-29</bdi> · آخر تغيير: <bdi dir="ltr">2026-10-29</bdi></div>
+</article><article class="card">
+  <div class="card-head"><h3>SHADOW Design <span class="badge">تحديث</span></h3><span class="city">الهفوف — يخدم الدمام والخبر</span></div>
+  <p class="desc">فيت أوت ومقاولات داخلية للمكاتب والتجزئة والمطاعم والمقاهي في المنطقة الشرقية.</p>
+  <ul class="links"><li><b>الموقع:</b> <a href="https://shadow.sa/shadow-best-fit-out-company-in-dammam-saudi-arabia/" target="_blank" rel="noopener">shadow.sa/shadow-best-fit-out-company-in-dammam-saudi-arabia</a></li><li><b>إنستغرام:</b> <span class="na">غير متاح</span></li><li><b>تيك توك:</b> <span class="na">غير متاح</span></li><li><b>فيسبوك:</b> <span class="na">غير متاح</span></li></ul>
+  <div class="act"><span class="pill na">النشاط: غير متاح</span><span class="metrics">لا حسابات تواصل اجتماعي مذكورة في الموقع</span></div>
+  <div class="meta">تم التحقق في: <bdi dir="ltr">2026-10-29</bdi> · أول ظهور: <bdi dir="ltr">2026-10-29</bdi> · آخر تغيير: <bdi dir="ltr">2026-10-29</bdi></div>
+</article></div>
+  <p class="legend">معيار النشاط (من الأرقام العامة الظاهرة يوم التحقق): مرتفع = 10 آلاف متابع فأكثر أو 500+ منشور مع حضور على أكثر من منصة؛ متوسط = 1,000–10,000 متابع؛ منخفض = أقل من 1,000 متابع؛ غير متاح = لا يوجد حساب موثّق. تواريخ آخر منشور غير متاحة بدون تسجيل دخول.</p>
+</section>
+<section>
+  <h2>العملاء المحتملون — مطاعم ومقاهٍ ومحلات</h2>
+  <p class="lead">افتتاحات جديدة وقريبة وتوسعات وفروع جديدة، إضافةً إلى قائمة المطاعم والمقاهي المُعدّة مسبقاً. لا توجد أسماء أو أرقام مُخمّنة.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>#</th><th>الاسم / الإشارة</th><th>المدينة / الحي</th><th>رقم التواصل</th><th>من نفّذ المكان (المقاول)</th><th>تعاقد مع منافس؟</th><th>المالك / المؤسس</th><th>ملاحظات</th><th>المصدر</th></tr></thead>
+    <tbody><tr>
+  <td class="num">1</td>
+  <td><b>Le Café LPM (لا بوتيت ميزون)</b> <span class="badge">تحديث</span><div class="sig">افتتاح قريب</div></td>
+  <td>الخبر<div class="sub">باي فرونت — كورنيش الخبر</div></td>
+  <td class="ltr">غير متوفر</td>
+  <td>غير معروف</td>
+  <td>غير معروف</td>
+  <td>La Petite Maison (الرئيس التنفيذي: نيكولا بودزينسكي)؛ مالك المشروع: مجموعة المهيدب، المطوّر: اجدان</td>
+  <td class="notes">مطعم وكافيه فرنسي؛ الافتتاح المعلن سبتمبر/أكتوبر 2026.</td>
+  <td class="src"><a href="https://muhaidib.com/ar/article/al-muhaidib-group-partners-with-le-cafe-lpm-at-bayfront-al-khobar" target="_blank" rel="noopener">[1]</a> <a href="https://platinumlist.net/guide/ar/la-petite-maison-is-opening-in-al-khobar-this-october/" target="_blank" rel="noopener">[2]</a></td>
+</tr><tr>
+  <td class="num">2</td>
+  <td><b>مطاعم ومقاهي الشبيلي جراند مول (Joe &amp; The Juice، Urth Caffé وغيرها)</b> <span class="badge">تحديث</span><div class="sig">افتتاح قريب</div></td>
+  <td>الخبر<div class="sub">الشبيلي جراند مول</div></td>
+  <td class="ltr">غير متوفر</td>
+  <td>غير معروف</td>
+  <td>غير معروف</td>
+  <td>المطوّر/المؤجر: الإيسار العربية (Arabian AlEsaar)</td>
+  <td class="notes">مول قيد الافتتاح يستقطب علامات مطاعم ومقاهٍ عالمية — فرصة فيت أوت لوحدات المستأجرين (تواصل عبر إدارة التأجير).</td>
+  <td class="src"><a href="https://ae.linkedin.com/posts/saudihubsa_saudihub-alshubailygrandmall-alkhobar-activity-7513938646660694016-32xT" target="_blank" rel="noopener">[1]</a></td>
+</tr><tr>
+  <td class="num">3</td>
+  <td><b>ليفه Leffah — الفرع الرابع</b> <span class="badge">تحديث</span><div class="sig">فرع جديد</div></td>
+  <td>الدمام<div class="sub">حي الشاطئ (قرب لولو مول)</div></td>
+  <td class="ltr">+966920026007 (الشركة الأم)</td>
+  <td>غير معروف</td>
+  <td>غير معروف</td>
+  <td>شركة نهلة الوادي التجارية (Nahla Al Wadi Trading Co.)</td>
+  <td class="notes">افتتاح تجريبي 22 أكتوبر 2026 للفرع الرابع في المنطقة الشرقية — علامة في توسع.</td>
+  <td class="src"><a href="https://nahlaalwadi.com/news-and-events/leffah-celebrates-soft-opening-of-its-4th-branch-in-dammam-s-ash-shati-district" target="_blank" rel="noopener">[1]</a></td>
+</tr><tr>
+  <td class="num">4</td>
+  <td><b>كوبلانت Coplant Coffee &amp; Dessert</b> <span class="badge">تحديث</span><div class="sig">فرع جديد</div></td>
+  <td>الدمام / الخبر<div class="sub">طريق الملك فهد (الدمام) + فرع الخبر</div></td>
+  <td class="ltr">+966568588056</td>
+  <td>غير معروف</td>
+  <td>غير معروف</td>
+  <td>غير متوفر</td>
+  <td class="notes">منشور 23/10/2026 يعلن فرع الخبر؛ فروع في الدمام والخبر والقطيف. الموقع: coplant.sa</td>
+  <td class="src"><a href="https://www.restaurants10.com/SA/Dammam/1203889566401300/Coplant-Coffee-%26-Dessert" target="_blank" rel="noopener">[1]</a></td>
+</tr><tr>
+  <td class="num">5</td>
+  <td><b>ارتشي ARCHI</b> <span class="badge">تحديث</span><div class="sig">توسع سريع</div></td>
+  <td>الخبر<div class="sub">باي فرونت — الكورنيش</div></td>
+  <td class="ltr">غير متوفر</td>
+  <td>غير معروف</td>
+  <td>غير معروف</td>
+  <td>غير متوفر</td>
+  <td class="notes">افتتح Archi Beach Club (الفرع الستون) سبتمبر 2026؛ علامة محلية سريعة التوسع بدأت بالخبر 2021.</td>
+  <td class="src"><a href="https://whatsonsaudiarabia.com/2026/09/archi-saudi-cafe-new-beachfront-spot-in-al-khobar/" target="_blank" rel="noopener">[1]</a></td>
+</tr><tr>
+  <td class="num">6</td>
+  <td><b>مشراق ساندوتش</b> <span class="badge">تحديث</span><div class="sig">توسع</div></td>
+  <td>الخبر<div class="sub">الراكة</div></td>
+  <td class="ltr">غير متوفر</td>
+  <td>غير معروف</td>
+  <td>غير معروف</td>
+  <td>غير متوفر</td>
+  <td class="notes">افتتاح فرع الراكة مايو 2026 ضمن خطة توسع في المنطقة الشرقية.</td>
+  <td class="src"><a href="https://franchising.sa/article/5537/fra-jdyad-lalamha-mshraqa-sandwayash-fya-alrakha/" target="_blank" rel="noopener">[1]</a></td>
+</tr><tr>
+  <td class="num">7</td>
+  <td><b>Tea Time — التركي سنتر</b> <span class="badge">تحديث</span><div class="sig">افتتاح حديث</div></td>
+  <td>الخبر<div class="sub">مجمع التركي سنتر</div></td>
+  <td class="ltr">غير متوفر</td>
+  <td>غير معروف</td>
+  <td>غير معروف</td>
+  <td>غير متوفر</td>
+  <td class="notes">افتتاح فبراير 2026 في مجمع التركي سنتر (مجموعة التركي) — مؤشر لتوسع العلامة.</td>
+  <td class="src"><a href="https://ae.linkedin.com/posts/jaber-alqahtani-3555b7163_%D8%A7%D9%84%D8%AA%D8%B1%D9%83%D9%8A%D8%B3%D9%86%D8%AA%D8%B1-%D8%A7%D9%84%D8%AE%D8%A8%D8%B1-activity-7428814868667035648-U4l6" target="_blank" rel="noopener">[1]</a></td>
+</tr><tr>
+  <td class="num">8</td>
+  <td><b>DeFlore Café</b> <span class="badge">تحديث</span><div class="sig">عميل منافس</div></td>
+  <td>الخبر<div class="sub">فيلاجيو + شمال الخبر</div></td>
+  <td class="ltr">غير متوفر</td>
+  <td>BIKAR (تصميم وتنفيذ 2024)</td>
+  <td>نعم — BIKAR</td>
+  <td>غير متوفر</td>
+  <td class="notes">فرعان نفذهما منافس؛ فرصة للفروع القادمة أو الصيانة.</td>
+  <td class="src"><a href="https://soordb.com/en/bikarinteriors" target="_blank" rel="noopener">[1]</a> <a href="https://www.behance.net/bikarinter15d0" target="_blank" rel="noopener">[2]</a></td>
+</tr><tr>
+  <td class="num">9</td>
+  <td><b>Chemistry Gardens</b> <span class="badge">تحديث</span><div class="sig">عميل منافس</div></td>
+  <td>الخبر<div class="sub"></div></td>
+  <td class="ltr">غير متوفر</td>
+  <td>Adzone (تصميم)</td>
+  <td>نعم — Adzone</td>
+  <td>غير متوفر</td>
+  <td class="notes">مقهى حائز على جوائز تصميم؛ له فرع في تبوك أيضاً — علامة في توسع.</td>
+  <td class="src"><a href="https://www.adzone.com.sa/projects" target="_blank" rel="noopener">[1]</a></td>
+</tr><tr>
+  <td class="num">10</td>
+  <td><b>Equal Cafe / Drive Thru</b> <span class="badge">تحديث</span><div class="sig">عميل منافس</div></td>
+  <td>الخبر / الدمام<div class="sub">الخبر، الدمام، الظهران (+ الرياض والطائف)</div></td>
+  <td class="ltr">غير متوفر</td>
+  <td>Adzone (تصميم)</td>
+  <td>نعم — Adzone</td>
+  <td>غير متوفر</td>
+  <td class="notes">سلسلة متعددة الفروع — فرص فروع جديدة.</td>
+  <td class="src"><a href="https://www.adzone.com.sa/projects" target="_blank" rel="noopener">[1]</a></td>
+</tr><tr>
+  <td class="num">11</td>
+  <td><b>Grambon Cafe جرام بن كافيه</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
+  <td>الخبر<div class="sub">الراكة الجنوبية (شارع غرناطة)</div></td>
+  <td class="ltr">+966593890704</td>
+  <td>غير معروف</td>
+  <td>غير معروف</td>
+  <td>غير متوفر (مراجعة عميل على reviewsaudi تذكر &#x27;صاحب المكان أ. فواز&#x27; — غير مؤكد رسمياً)</td>
+  <td class="notes">مسؤول المطعم: Fawaz AlMohaisen — Small Business Manager - Grambon Cafe منذ 04/2019 (حسب LinkedIn) | مقهى مختص مستقل. فرع ثانٍ: Grambon Cafe - K Plaza، شارع سويكت، الخبر الشمالية، هاتف +966567456898 (exa.ai/library/place/zhflg1rlhmp). مصادر الأشخاص: https://linkedin.com/in/fawaz-almohaisen-6986778 ; https://reviewsaudi.com/eastern-region/grambon-cafe-166160</td>
+  <td class="src"><a href="https://sa.arabplaces.com/eastern-region/grambon-cafe-451074" target="_blank" rel="noopener">[1]</a> <a href="https://niche3ar.price-ksa.com/annuaire/grambon-cafe-%D8%AC%D8%B1%D8%A7%D9%85-%D8%A8%D9%86-%D9%83%D8%A7%D9%81%D9%8A%D9%87-raka-%D8%A7%D9%84%D8%B1%D8%A7%D9%83%D9%87-%D8%A7%D9%84%D8%AE%D8%A8%D8%B1-966-59-389-0704/" target="_blank" rel="noopener">[2]</a></td>
+</tr><tr>
+  <td class="num">12</td>
+  <td><b>Mou&#x27;s Kitchen</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
+  <td>الخبر<div class="sub">العقربية (شارع الأبرار)</div></td>
+  <td class="ltr">+9668001111827</td>
+  <td>غير معروف</td>
+  <td>غير معروف</td>
+  <td>Development &amp; Supply Co. Ltd. (الشركة الأم التي أعلنت إطلاق Mou&#x27;s Kitchen)</td>
+  <td class="notes">مطبخ مركزي/سحابي (cloud kitchen) في الخبر يقدم تموين ومخبوزات. Bala Subramanian — Executive Co-Chef لدى Development &amp; Supply Co. Ltd. (LinkedIn). المصادر: https://www.linkedin.com/posts/dev-supply-co-ltd_mouskitchen-alkhobar-saudiarabia-activity-7503925668141899776-nCCP ; https://linkedin.com/company/dev-supply-co-ltd ; https://linkedin.com/in/bala-subramanian-b6793289</td>
+  <td class="src"><a href="https://exa.ai/library/places?q=81ecfcca2e41a5de" target="_blank" rel="noopener">[1]</a> <a href="https://maps.yango.com/en-sa/org/212757176170/" target="_blank" rel="noopener">[2]</a></td>
+</tr><tr>
+  <td class="num">13</td>
+  <td><b>Spark Mood Cafe سبارك كافيه</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
+  <td>الخبر<div class="sub">الراكة الجنوبية (طريق الأمير سلطان)</div></td>
+  <td class="ltr">+966506450585</td>
+  <td>غير معروف</td>
+  <td>غير معروف</td>
+  <td>غير متوفر</td>
+  <td class="notes">مسؤول المطعم: مذكور في مراجعات عملاء فقط (الاسم الأول): &#x27;Shrouk, the manager&#x27; (مراجعة 03/2025)، و&#x27;مديرة الصالة مدام نجوان&#x27; (مراجعة 03/2023) — غير مؤكد رسمياً | مقهى وشيشة مستقل، تراس خارجي. إنستغرام: instagram.com/sparkcafemood. مراجعة تذكر أن مالك البرج (المبنى) مهمل في نظافة المدخل — فرصة صيانة/تجديد. المصادر: https://exa.ai/library/place/qgl71r8gxjw ; https://sa.arabplaces.com/eastern-region/spark-cafe-500835</td>
+  <td class="src"><a href="https://sa.arabplaces.com/eastern-region/spark-cafe-500835" target="_blank" rel="noopener">[1]</a> <a href="https://exa.ai/library/place/qgl71r8gxjw" target="_blank" rel="noopener">[2]</a></td>
+</tr><tr>
+  <td class="num">14</td>
+  <td><b>شاي بخار - فرع الفيصلية</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
+  <td>الدمام<div class="sub">الفيصلية (شارع عمر بن الخطاب)</div></td>
+  <td class="ltr">0591703931</td>
+  <td>غير معروف</td>
+  <td>غير معروف</td>
+  <td>عبدالله الشهري (المؤسس والمالك)</td>
+  <td class="notes">علامة سعودية بدأت من بوفيه الشاطئ بخميس مشيط. فروع: العقربية-الخبر 0593406835، كورنيش الخبر، الرياض، العلا. واتساب الإدارة 0598074525. وسيط الامتياز: الشركة الوطنية للامتيازات nf.com.sa. المصادر: https://saudiarestaurants.com/%D8%B4%D8%A7%D9%8A-%D8%A8%D8%AE%D8%A7%D8%B1/ ; https://www.rowadalaamal.com/%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%84%D9%87-%D8%A7%D9%84%D8%B4%D9%87%D8%B1%D9%8A-%D9%8A%D8%B3%D8%B1%D8%AF-%D9%82%D8%B5%D8%A9-%D9%86%D8%AC%D8%A7%D8%AD-%D9%85%D8%B4%D8%B1%D9%88%D8%B9-%D8%B4%D8%A7%D9%8A/ ; https://www.nf.com.sa/ar/our-brand-1/%D8%B4%D8%A7%D9%8A-%D8%A8%D8%AE%D8%A7%D8%B1</td>
+  <td class="src"><a href="https://saudiarestaurants.com/%D8%B4%D8%A7%D9%8A-%D8%A8%D8%AE%D8%A7%D8%B1/" target="_blank" rel="noopener">[1]</a></td>
+</tr><tr>
+  <td class="num">15</td>
+  <td><b>محمصة ومقهى جراف Graph Cafe</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
+  <td>الدمام<div class="sub">الفيصلية (طريق الظهران الجبيل الفرعي)</div></td>
+  <td class="ltr">+966556627595</td>
+  <td>غير معروف</td>
+  <td>غير معروف</td>
+  <td>غير متوفر</td>
+  <td class="notes">مسؤول المطعم: Borhan eldin Mohammed — Operations Manager - Graph Coffee منذ 10/2025 (LinkedIn) | محمصة ومقهى محلي، دورين ودرج حلزوني (ملاحظة من مراجعات: قلة الطاولات بالدور الثاني). Abdallah Abu Bakr — Purchasing Manager منذ 07/2024 (LinkedIn). متجر: graph-sa.com. المصادر: https://linkedin.com/in/borhan-eldin-mohammed-373912ba ; https://linkedin.com/in/abdallah-abu-bakr-691603123 ; https://linkedin.com/company/graph-coffee</td>
+  <td class="src"><a href="https://exa.ai/library/place/z04pgf90214" target="_blank" rel="noopener">[1]</a> <a href="https://www.alsharqiacafes.com/2020/%d9%83%d8%a7%d9%81%d9%8a%d9%87-%d8%ac%d8%b1%d8%a7%d9%81/" target="_blank" rel="noopener">[2]</a></td>
+</tr><tr>
+  <td class="num">16</td>
+  <td><b>دوز كافيه Dose Cafe - فرع الشاطئ</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
+  <td>الدمام<div class="sub">الشاطئ الغربي (طريق الأمير محمد بن فهد، مقابل لولو)</div></td>
+  <td class="ltr">0536632657</td>
+  <td>غير معروف لهذا الفرع</td>
+  <td>نعم — BIKAR (تصميم وتنفيذ فرع الياسمين بالرياض 2019)</td>
+  <td>Abdullah A. Al Arfaj — Founder &amp; CEO (01/2017–10/2024 حسب LinkedIn)؛ موقع saudiarestaurants (2019) يذكر &#x27;صاحب المقهى جاسم العبوه&#x27;</td>
+  <td class="notes">سلسلة (ليست مستقلة): 70+ فرع بالسعودية؛ الكيان: Coffee Taste Company حسب LinkedIn المؤسس؛ أصبحت مملوكة سعودياً بالكامل. emad thabet — Food Division Director (LinkedIn الشركة). فرع الفيصلية بالدمام: mat3am.net يذكر +966562222411 بينما saudiarestaurants ينسب الرقم نفسه لفرع الراكة بالخبر (تعارض). المصادر: https://linkedin.com/in/abdullah-a-al-arfaj-mba-cert-dir-74850b60 ; https://franchisemarket.co/dose-cafe/ ; https://linkedin.com/company/dose-cafe</td>
+  <td class="src"><a href="https://saudiarestaurants.com/%D8%AF%D9%88%D8%B2-%D9%83%D8%A7%D9%81%D9%8A%D9%87-dose-cafe/" target="_blank" rel="noopener">[1]</a> <a href="https://soordb.com/en/bikarinteriors" target="_blank" rel="noopener">[2]</a></td>
+</tr></tbody>
+  </table></div>
+</section>
+</main>
+<footer>البيانات من مصادر عامة على الإنترنت — يُرجى التحقق قبل التواصل. · مؤسسة أبرج للإنشاءات المتكاملة · info@abroj.sa · instagram.com/abroj.sa</footer>
+<script type="application/json" id="abroj-data">
+{
+ "meta": {
+  "title": "صفحة المراقبة",
+  "subtitle": "مراقبة المنافسين والعملاء المحتملين لمؤسسة أبرج للإنشاءات المتكاملة — الخبر والدمام · 29 أكتوبر 2026",
+  "last_updated": "2026-10-29",
+  "activity_method": "معيار النشاط (من الأرقام العامة الظاهرة يوم التحقق): مرتفع = 10 آلاف متابع فأكثر أو 500+ منشور مع حضور على أكثر من منصة؛ متوسط = 1,000–10,000 متابع؛ منخفض = أقل من 1,000 متابع؛ غير متاح = لا يوجد حساب موثّق. تواريخ آخر منشور غير متاحة بدون تسجيل دخول."
+ },
+ "competitors": [
+  {
+   "id": "adzone",
+   "name": "Adzone | شركة النطاق الإضافي للتصميم",
+   "city": "الخبر (حي البستان)",
+   "description": "استوديو تصميم معماري وداخلي مع إشراف وتنفيذ وتسليم مفتاح؛ أعمال مقاهٍ ومطاعم كثيرة في الخبر (Chemistry Gardens، Ouden، Equal، BlackKnight، Abla).",
+   "website": "https://www.adzone.com.sa/",
+   "instagram": "https://www.instagram.com/adzone_design/",
+   "tiktok": null,
+   "facebook": null,
+   "other_links": [
+    {
+     "label": "لينكدإن",
+     "url": "https://www.linkedin.com/company/adzone-designing-co"
+    }
+   ],
+   "metrics": "إنستغرام: 366K متابع · 122 منشور. لينكدإن: ~2,618 متابع. آخر نشاط: غير متاح. (الموقع لم يستجب من جهازنا وقت التحقق لكنه مفهرس في البحث)",
+   "activity": "مرتفع",
+   "checked_on": "2026-10-29",
+   "sources": [],
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "hadatha",
+   "name": "حداثة للديكور والتشطيبات (Hadatha)",
+   "city": "الأحساء — فرق دائمة في الدمام والخبر",
+   "description": "فيت أوت تجاري للمطاعم والمقاهي والمكاتب: تصميم وتنفيذ وتوريد، مدير مشروع واحد، تنفيذ 4–10 أسابيع.",
+   "website": "https://hadatha.sa/",
+   "instagram": "https://www.instagram.com/hadatha.sa",
+   "tiktok": "https://www.tiktok.com/@hadatha..sa",
+   "facebook": "https://www.facebook.com/share/18d7rmzo15/",
+   "other_links": [],
+   "metrics": "إنستغرام: 13K متابع · 714 منشور. تيك توك: 1,133 متابع · 123 فيديو · 11.4K إعجاب. آخر نشاط: غير متاح",
+   "activity": "مرتفع",
+   "checked_on": "2026-10-29",
+   "sources": [],
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "made",
+   "name": "MADE Design Studio",
+   "city": "الخبر (الراكة) — الظهران — الدمام",
+   "description": "تصميم داخلي وفيت أوت فاخر مع نجارة وأثاث داخلي وتنفيذ تسليم مفتاح؛ يشمل المطاعم والمقاهي والمحلات.",
+   "website": "https://made-sa.co/en",
+   "instagram": "https://www.instagram.com/made.design.co/",
+   "tiktok": "https://www.tiktok.com/@made.design.co",
+   "facebook": null,
+   "other_links": [
+    {
+     "label": "لينكدإن",
+     "url": "https://www.linkedin.com/company/made-design-studio-interior-design-fit-out"
+    }
+   ],
+   "metrics": "إنستغرام: 6,415 متابع · 463 منشور. تيك توك: 193 متابع · 93 فيديو · 1,156 إعجاب. آخر نشاط: غير متاح",
+   "activity": "متوسط",
+   "checked_on": "2026-10-29",
+   "sources": [],
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "bikar",
+   "name": "BIKAR للتصميم والتنفيذ (BIKAR Design & Build)",
+   "city": "الخبر",
+   "description": "تصميم داخلي وتنفيذ تشطيبات متكاملة منذ 2017؛ منافس مباشر في المقاهي والمطاعم (DeFlore، Orenda، KOPI، LMK، Tenderloin، Dose الرياض).",
+   "website": null,
+   "instagram": "https://www.instagram.com/bikarksa/",
+   "tiktok": null,
+   "facebook": null,
+   "other_links": [
+    {
+     "label": "Behance",
+     "url": "https://www.behance.net/bikarinter15d0"
+    },
+    {
+     "label": "ملف Soor",
+     "url": "https://soordb.com/en/bikarinteriors"
+    }
+   ],
+   "metrics": "إنستغرام: 5,181 متابع · 633 منشور. Behance: 26 متابع · 1,477 مشاهدة. الموقع الرسمي: غير متاح. آخر نشاط: مشاريع مؤرخة 2026 على Soor",
+   "activity": "متوسط",
+   "checked_on": "2026-10-29",
+   "sources": [],
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "makan",
+   "name": "makan.design",
+   "city": "الدمام (شارع عثمان بن عفان، ابن خلدون)",
+   "description": "تصميم وتنفيذ داخلي تسليم مفتاح (Design & Build) للشركات والضيافة والسكني، بعقد واحد وجدول كميات مثبت.",
+   "website": "https://www.makan.design/",
+   "instagram": "https://www.instagram.com/makandotdesign/",
+   "tiktok": null,
+   "facebook": null,
+   "other_links": [
+    {
+     "label": "لينكدإن",
+     "url": "https://www.linkedin.com/company/makandotdesign"
+    }
+   ],
+   "metrics": "إنستغرام: 1,276 متابع · 309 منشور. آخر نشاط: غير متاح",
+   "activity": "متوسط",
+   "checked_on": "2026-10-29",
+   "sources": [],
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "gyptech",
+   "name": "جبتك GYPTECH",
+   "city": "الدمام (مصنع) — الخبر (برج سهمية)",
+   "description": "تصنيع وتركيب أنظمة داخلية للمطاعم والمقاهي: أسقف وجدران صوتية، أسطح طاولات ومقاعد، حمامات — منافس جزئي/مورد محتمل.",
+   "website": "https://gyptech.com.sa/",
+   "instagram": "https://www.instagram.com/gyptech_sa/",
+   "tiktok": null,
+   "facebook": "https://www.facebook.com/profile.php?id=61550510170242",
+   "other_links": [
+    {
+     "label": "لينكدإن",
+     "url": "https://www.linkedin.com/company/gyptech-sa/"
+    }
+   ],
+   "metrics": "إنستغرام: 315 متابع · 203 منشور. آخر نشاط: غير متاح",
+   "activity": "منخفض",
+   "checked_on": "2026-10-29",
+   "sources": [],
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "tanasog",
+   "name": "تناسق البناء Tanasog Al Bina",
+   "city": "الخبر",
+   "description": "مقاول فيت أوت (تصميم وتنفيذ) للمكاتب وصالات العرض في الخبر والدمام، مع إدارة المقاولين الباطن والتسليم.",
+   "website": "https://tanasog.com/",
+   "instagram": "https://www.instagram.com/tanasog.fitout",
+   "tiktok": null,
+   "facebook": null,
+   "other_links": [
+    {
+     "label": "لينكدإن",
+     "url": "https://www.linkedin.com/company/tanasog"
+    }
+   ],
+   "metrics": "إنستغرام: 31 متابع · 30 منشور. آخر نشاط: غير متاح",
+   "activity": "منخفض",
+   "checked_on": "2026-10-29",
+   "sources": [],
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "thts",
+   "name": "THTS — Total Hospitality Technical Solutions",
+   "city": "الدمام والخبر (ضمن فروع بالمملكة)",
+   "description": "تشطيب مطاعم وتجزئة ومكاتب تسليم مفتاح، نجارة، وتوريد وتركيب معدات المطابخ التجارية وصيانتها بعقد واحد.",
+   "website": "https://www.thts.co/ar/dammam-khobar.html",
+   "instagram": null,
+   "tiktok": null,
+   "facebook": null,
+   "other_links": [],
+   "metrics": "لا حسابات تواصل اجتماعي مذكورة في الموقع",
+   "activity": "غير متاح",
+   "checked_on": "2026-10-29",
+   "sources": [],
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "designation",
+   "name": "ديزينيشن Designation",
+   "city": "الخبر (صناعية الثقبة)",
+   "description": "أعمال خشبية فاخرة، تصميم داخلي، فيت أوت تسليم مفتاح، ومقاولات عامة؛ يشمل المطاعم والمقاهي والمعارض (Folk، Hixagone، Wekad).",
+   "website": "https://designation-sa.com/index-ar.html",
+   "instagram": null,
+   "tiktok": null,
+   "facebook": null,
+   "other_links": [],
+   "metrics": "لا حسابات تواصل اجتماعي مذكورة في الموقع (واتساب فقط)",
+   "activity": "غير متاح",
+   "checked_on": "2026-10-29",
+   "sources": [],
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "contractor_sa",
+   "name": "مقاول الشرقية",
+   "city": "الدمام والخبر",
+   "description": "مقاولات عامة وترميم وتشطيب، وتصميم وتنفيذ مطاعم وكافيهات ومحلات تجارية.",
+   "website": "https://contractor-sa.com/",
+   "instagram": null,
+   "tiktok": null,
+   "facebook": null,
+   "other_links": [],
+   "metrics": "لا حسابات تواصل اجتماعي مذكورة في الموقع",
+   "activity": "غير متاح",
+   "checked_on": "2026-10-29",
+   "sources": [],
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "shadow",
+   "name": "SHADOW Design",
+   "city": "الهفوف — يخدم الدمام والخبر",
+   "description": "فيت أوت ومقاولات داخلية للمكاتب والتجزئة والمطاعم والمقاهي في المنطقة الشرقية.",
+   "website": "https://shadow.sa/shadow-best-fit-out-company-in-dammam-saudi-arabia/",
+   "instagram": null,
+   "tiktok": null,
+   "facebook": null,
+   "other_links": [],
+   "metrics": "لا حسابات تواصل اجتماعي مذكورة في الموقع",
+   "activity": "غير متاح",
+   "checked_on": "2026-10-29",
+   "sources": [],
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  }
+ ],
+ "clients": [
+  {
+   "id": "le_cafe_lpm",
+   "name": "Le Café LPM (لا بوتيت ميزون)",
+   "city": "الخبر",
+   "district": "باي فرونت — كورنيش الخبر",
+   "phone": null,
+   "contractor": "غير معروف",
+   "competitor_contract": "غير معروف",
+   "owner": "La Petite Maison (الرئيس التنفيذي: نيكولا بودزينسكي)؛ مالك المشروع: مجموعة المهيدب، المطوّر: اجدان",
+   "notes": "مطعم وكافيه فرنسي؛ الافتتاح المعلن سبتمبر/أكتوبر 2026.",
+   "signal": "افتتاح قريب",
+   "sources": [
+    "https://muhaidib.com/ar/article/al-muhaidib-group-partners-with-le-cafe-lpm-at-bayfront-al-khobar",
+    "https://platinumlist.net/guide/ar/la-petite-maison-is-opening-in-al-khobar-this-october/"
+   ],
+   "origin": "web",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "shubaily_mall",
+   "name": "مطاعم ومقاهي الشبيلي جراند مول (Joe & The Juice، Urth Caffé وغيرها)",
+   "city": "الخبر",
+   "district": "الشبيلي جراند مول",
+   "phone": null,
+   "contractor": "غير معروف",
+   "competitor_contract": "غير معروف",
+   "owner": "المطوّر/المؤجر: الإيسار العربية (Arabian AlEsaar)",
+   "notes": "مول قيد الافتتاح يستقطب علامات مطاعم ومقاهٍ عالمية — فرصة فيت أوت لوحدات المستأجرين (تواصل عبر إدارة التأجير).",
+   "signal": "افتتاح قريب",
+   "sources": [
+    "https://ae.linkedin.com/posts/saudihubsa_saudihub-alshubailygrandmall-alkhobar-activity-7513938646660694016-32xT"
+   ],
+   "origin": "web",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "leffah",
+   "name": "ليفه Leffah — الفرع الرابع",
+   "city": "الدمام",
+   "district": "حي الشاطئ (قرب لولو مول)",
+   "phone": "+966920026007 (الشركة الأم)",
+   "contractor": "غير معروف",
+   "competitor_contract": "غير معروف",
+   "owner": "شركة نهلة الوادي التجارية (Nahla Al Wadi Trading Co.)",
+   "notes": "افتتاح تجريبي 22 أكتوبر 2026 للفرع الرابع في المنطقة الشرقية — علامة في توسع.",
+   "signal": "فرع جديد",
+   "sources": [
+    "https://nahlaalwadi.com/news-and-events/leffah-celebrates-soft-opening-of-its-4th-branch-in-dammam-s-ash-shati-district"
+   ],
+   "origin": "web",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "coplant",
+   "name": "كوبلانت Coplant Coffee & Dessert",
+   "city": "الدمام / الخبر",
+   "district": "طريق الملك فهد (الدمام) + فرع الخبر",
+   "phone": "+966568588056",
+   "contractor": "غير معروف",
+   "competitor_contract": "غير معروف",
+   "owner": null,
+   "notes": "منشور 23/10/2026 يعلن فرع الخبر؛ فروع في الدمام والخبر والقطيف. الموقع: coplant.sa",
+   "signal": "فرع جديد",
+   "sources": [
+    "https://www.restaurants10.com/SA/Dammam/1203889566401300/Coplant-Coffee-%26-Dessert"
+   ],
+   "origin": "web",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "archi",
+   "name": "ارتشي ARCHI",
+   "city": "الخبر",
+   "district": "باي فرونت — الكورنيش",
+   "phone": null,
+   "contractor": "غير معروف",
+   "competitor_contract": "غير معروف",
+   "owner": null,
+   "notes": "افتتح Archi Beach Club (الفرع الستون) سبتمبر 2026؛ علامة محلية سريعة التوسع بدأت بالخبر 2021.",
+   "signal": "توسع سريع",
+   "sources": [
+    "https://whatsonsaudiarabia.com/2026/09/archi-saudi-cafe-new-beachfront-spot-in-al-khobar/"
+   ],
+   "origin": "web",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "mishraq",
+   "name": "مشراق ساندوتش",
+   "city": "الخبر",
+   "district": "الراكة",
+   "phone": null,
+   "contractor": "غير معروف",
+   "competitor_contract": "غير معروف",
+   "owner": null,
+   "notes": "افتتاح فرع الراكة مايو 2026 ضمن خطة توسع في المنطقة الشرقية.",
+   "signal": "توسع",
+   "sources": [
+    "https://franchising.sa/article/5537/fra-jdyad-lalamha-mshraqa-sandwayash-fya-alrakha/"
+   ],
+   "origin": "web",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "tea_time",
+   "name": "Tea Time — التركي سنتر",
+   "city": "الخبر",
+   "district": "مجمع التركي سنتر",
+   "phone": null,
+   "contractor": "غير معروف",
+   "competitor_contract": "غير معروف",
+   "owner": null,
+   "notes": "افتتاح فبراير 2026 في مجمع التركي سنتر (مجموعة التركي) — مؤشر لتوسع العلامة.",
+   "signal": "افتتاح حديث",
+   "sources": [
+    "https://ae.linkedin.com/posts/jaber-alqahtani-3555b7163_%D8%A7%D9%84%D8%AA%D8%B1%D9%83%D9%8A%D8%B3%D9%86%D8%AA%D8%B1-%D8%A7%D9%84%D8%AE%D8%A8%D8%B1-activity-7428814868667035648-U4l6"
+   ],
+   "origin": "web",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "deflore",
+   "name": "DeFlore Café",
+   "city": "الخبر",
+   "district": "فيلاجيو + شمال الخبر",
+   "phone": null,
+   "contractor": "BIKAR (تصميم وتنفيذ 2024)",
+   "competitor_contract": "نعم — BIKAR",
+   "owner": null,
+   "notes": "فرعان نفذهما منافس؛ فرصة للفروع القادمة أو الصيانة.",
+   "signal": "عميل منافس",
+   "sources": [
+    "https://soordb.com/en/bikarinteriors",
+    "https://www.behance.net/bikarinter15d0"
+   ],
+   "origin": "web",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "chemistry",
+   "name": "Chemistry Gardens",
+   "city": "الخبر",
+   "district": null,
+   "phone": null,
+   "contractor": "Adzone (تصميم)",
+   "competitor_contract": "نعم — Adzone",
+   "owner": null,
+   "notes": "مقهى حائز على جوائز تصميم؛ له فرع في تبوك أيضاً — علامة في توسع.",
+   "signal": "عميل منافس",
+   "sources": [
+    "https://www.adzone.com.sa/projects"
+   ],
+   "origin": "web",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "equal",
+   "name": "Equal Cafe / Drive Thru",
+   "city": "الخبر / الدمام",
+   "district": "الخبر، الدمام، الظهران (+ الرياض والطائف)",
+   "phone": null,
+   "contractor": "Adzone (تصميم)",
+   "competitor_contract": "نعم — Adzone",
+   "owner": null,
+   "notes": "سلسلة متعددة الفروع — فرص فروع جديدة.",
+   "signal": "عميل منافس",
+   "sources": [
+    "https://www.adzone.com.sa/projects"
+   ],
+   "origin": "web",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "xlsx_1",
+   "name": "Grambon Cafe جرام بن كافيه",
+   "city": "الخبر",
+   "district": "الراكة الجنوبية (شارع غرناطة)",
+   "phone": "+966593890704",
+   "contractor": "غير معروف",
+   "competitor_contract": "غير معروف",
+   "owner": "غير متوفر (مراجعة عميل على reviewsaudi تذكر 'صاحب المكان أ. فواز' — غير مؤكد رسمياً)",
+   "notes": "مسؤول المطعم: Fawaz AlMohaisen — Small Business Manager - Grambon Cafe منذ 04/2019 (حسب LinkedIn) | مقهى مختص مستقل. فرع ثانٍ: Grambon Cafe - K Plaza، شارع سويكت، الخبر الشمالية، هاتف +966567456898 (exa.ai/library/place/zhflg1rlhmp). مصادر الأشخاص: https://linkedin.com/in/fawaz-almohaisen-6986778 ; https://reviewsaudi.com/eastern-region/grambon-cafe-166160",
+   "signal": "من قائمة المطاعم المُعدّة",
+   "sources": [
+    "https://sa.arabplaces.com/eastern-region/grambon-cafe-451074",
+    "https://niche3ar.price-ksa.com/annuaire/grambon-cafe-%D8%AC%D8%B1%D8%A7%D9%85-%D8%A8%D9%86-%D9%83%D8%A7%D9%81%D9%8A%D9%87-raka-%D8%A7%D9%84%D8%B1%D8%A7%D9%83%D9%87-%D8%A7%D9%84%D8%AE%D8%A8%D8%B1-966-59-389-0704/"
+   ],
+   "origin": "xlsx",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "xlsx_2",
+   "name": "Mou's Kitchen",
+   "city": "الخبر",
+   "district": "العقربية (شارع الأبرار)",
+   "phone": "+9668001111827",
+   "contractor": "غير معروف",
+   "competitor_contract": "غير معروف",
+   "owner": "Development & Supply Co. Ltd. (الشركة الأم التي أعلنت إطلاق Mou's Kitchen)",
+   "notes": "مطبخ مركزي/سحابي (cloud kitchen) في الخبر يقدم تموين ومخبوزات. Bala Subramanian — Executive Co-Chef لدى Development & Supply Co. Ltd. (LinkedIn). المصادر: https://www.linkedin.com/posts/dev-supply-co-ltd_mouskitchen-alkhobar-saudiarabia-activity-7503925668141899776-nCCP ; https://linkedin.com/company/dev-supply-co-ltd ; https://linkedin.com/in/bala-subramanian-b6793289",
+   "signal": "من قائمة المطاعم المُعدّة",
+   "sources": [
+    "https://exa.ai/library/places?q=81ecfcca2e41a5de",
+    "https://maps.yango.com/en-sa/org/212757176170/"
+   ],
+   "origin": "xlsx",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "xlsx_3",
+   "name": "Spark Mood Cafe سبارك كافيه",
+   "city": "الخبر",
+   "district": "الراكة الجنوبية (طريق الأمير سلطان)",
+   "phone": "+966506450585",
+   "contractor": "غير معروف",
+   "competitor_contract": "غير معروف",
+   "owner": null,
+   "notes": "مسؤول المطعم: مذكور في مراجعات عملاء فقط (الاسم الأول): 'Shrouk, the manager' (مراجعة 03/2025)، و'مديرة الصالة مدام نجوان' (مراجعة 03/2023) — غير مؤكد رسمياً | مقهى وشيشة مستقل، تراس خارجي. إنستغرام: instagram.com/sparkcafemood. مراجعة تذكر أن مالك البرج (المبنى) مهمل في نظافة المدخل — فرصة صيانة/تجديد. المصادر: https://exa.ai/library/place/qgl71r8gxjw ; https://sa.arabplaces.com/eastern-region/spark-cafe-500835",
+   "signal": "من قائمة المطاعم المُعدّة",
+   "sources": [
+    "https://sa.arabplaces.com/eastern-region/spark-cafe-500835",
+    "https://exa.ai/library/place/qgl71r8gxjw"
+   ],
+   "origin": "xlsx",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "xlsx_4",
+   "name": "شاي بخار - فرع الفيصلية",
+   "city": "الدمام",
+   "district": "الفيصلية (شارع عمر بن الخطاب)",
+   "phone": "0591703931",
+   "contractor": "غير معروف",
+   "competitor_contract": "غير معروف",
+   "owner": "عبدالله الشهري (المؤسس والمالك)",
+   "notes": "علامة سعودية بدأت من بوفيه الشاطئ بخميس مشيط. فروع: العقربية-الخبر 0593406835، كورنيش الخبر، الرياض، العلا. واتساب الإدارة 0598074525. وسيط الامتياز: الشركة الوطنية للامتيازات nf.com.sa. المصادر: https://saudiarestaurants.com/%D8%B4%D8%A7%D9%8A-%D8%A8%D8%AE%D8%A7%D8%B1/ ; https://www.rowadalaamal.com/%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%84%D9%87-%D8%A7%D9%84%D8%B4%D9%87%D8%B1%D9%8A-%D9%8A%D8%B3%D8%B1%D8%AF-%D9%82%D8%B5%D8%A9-%D9%86%D8%AC%D8%A7%D8%AD-%D9%85%D8%B4%D8%B1%D9%88%D8%B9-%D8%B4%D8%A7%D9%8A/ ; https://www.nf.com.sa/ar/our-brand-1/%D8%B4%D8%A7%D9%8A-%D8%A8%D8%AE%D8%A7%D8%B1",
+   "signal": "من قائمة المطاعم المُعدّة",
+   "sources": [
+    "https://saudiarestaurants.com/%D8%B4%D8%A7%D9%8A-%D8%A8%D8%AE%D8%A7%D8%B1/"
+   ],
+   "origin": "xlsx",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "xlsx_5",
+   "name": "محمصة ومقهى جراف Graph Cafe",
+   "city": "الدمام",
+   "district": "الفيصلية (طريق الظهران الجبيل الفرعي)",
+   "phone": "+966556627595",
+   "contractor": "غير معروف",
+   "competitor_contract": "غير معروف",
+   "owner": null,
+   "notes": "مسؤول المطعم: Borhan eldin Mohammed — Operations Manager - Graph Coffee منذ 10/2025 (LinkedIn) | محمصة ومقهى محلي، دورين ودرج حلزوني (ملاحظة من مراجعات: قلة الطاولات بالدور الثاني). Abdallah Abu Bakr — Purchasing Manager منذ 07/2024 (LinkedIn). متجر: graph-sa.com. المصادر: https://linkedin.com/in/borhan-eldin-mohammed-373912ba ; https://linkedin.com/in/abdallah-abu-bakr-691603123 ; https://linkedin.com/company/graph-coffee",
+   "signal": "من قائمة المطاعم المُعدّة",
+   "sources": [
+    "https://exa.ai/library/place/z04pgf90214",
+    "https://www.alsharqiacafes.com/2020/%d9%83%d8%a7%d9%81%d9%8a%d9%87-%d8%ac%d8%b1%d8%a7%d9%81/"
+   ],
+   "origin": "xlsx",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  },
+  {
+   "id": "xlsx_6",
+   "name": "دوز كافيه Dose Cafe - فرع الشاطئ",
+   "city": "الدمام",
+   "district": "الشاطئ الغربي (طريق الأمير محمد بن فهد، مقابل لولو)",
+   "phone": "0536632657",
+   "contractor": "غير معروف لهذا الفرع",
+   "competitor_contract": "نعم — BIKAR (تصميم وتنفيذ فرع الياسمين بالرياض 2019)",
+   "owner": "Abdullah A. Al Arfaj — Founder & CEO (01/2017–10/2024 حسب LinkedIn)؛ موقع saudiarestaurants (2019) يذكر 'صاحب المقهى جاسم العبوه'",
+   "notes": "سلسلة (ليست مستقلة): 70+ فرع بالسعودية؛ الكيان: Coffee Taste Company حسب LinkedIn المؤسس؛ أصبحت مملوكة سعودياً بالكامل. emad thabet — Food Division Director (LinkedIn الشركة). فرع الفيصلية بالدمام: mat3am.net يذكر +966562222411 بينما saudiarestaurants ينسب الرقم نفسه لفرع الراكة بالخبر (تعارض). المصادر: https://linkedin.com/in/abdullah-a-al-arfaj-mba-cert-dir-74850b60 ; https://franchisemarket.co/dose-cafe/ ; https://linkedin.com/company/dose-cafe",
+   "signal": "من قائمة المطاعم المُعدّة",
+   "sources": [
+    "https://saudiarestaurants.com/%D8%AF%D9%88%D8%B2-%D9%83%D8%A7%D9%81%D9%8A%D9%87-dose-cafe/",
+    "https://soordb.com/en/bikarinteriors"
+   ],
+   "origin": "xlsx",
+   "first_seen": "2026-10-29",
+   "last_changed": "2026-10-29"
+  }
+ ]
+}
+</script>
+</body>
+</html>
