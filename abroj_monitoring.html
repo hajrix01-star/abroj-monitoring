@@ -7,23 +7,28 @@
 <title>صفحة المراقبة — أبرج</title>
 <style>
 :root{--navy:#102A5C;--orange:#F28C28;--bg:#F6F1E7;--card:#fff;--line:#E4DCCB;--muted:#6B7280}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:#1f2937;font-family:'Tajawal','Segoe UI',Tahoma,Arial,sans-serif;line-height:1.7}
+*,*::before,*::after{box-sizing:border-box}
+html,body{overflow-x:hidden;max-width:100%}
+img{max-width:100%;height:auto}
+body{margin:0;-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--bg);color:#1f2937;font-family:'Tajawal','Segoe UI',Tahoma,Arial,sans-serif;line-height:1.7}
 header{background:var(--navy);color:#fff;border-bottom:5px solid var(--orange)}
 .wrap{max-width:1240px;margin:0 auto;padding:0 20px}
 .hdr{display:flex;align-items:center;gap:20px;padding:22px 20px;flex-wrap:wrap}
-.logo{background:#fff;border-radius:12px;padding:8px 14px;display:flex}
-.logo img{height:56px;display:block}
+.logo{background:var(--navy);color:#fff;border-radius:12px;padding:6px 4px;display:flex;align-items:center;flex:0 0 auto;max-width:100%}
+.logo img{height:56px;width:auto;max-width:100%;display:block}
+.hdr>*{min-width:0;max-width:100%}
 h1{margin:0;font-size:1.9rem}
-.subtitle{margin:4px 0 0;opacity:.9;font-size:.98rem}
+.subtitle{margin:4px 0 0;opacity:.9;font-size:.98rem;color:#fff}
+header h1{color:#fff}
 .upd{margin-inline-start:auto;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:8px 14px;font-size:.9rem}
 .upd b{color:var(--orange)}
 section{margin:30px 0}
 h2{color:var(--navy);font-size:1.45rem;margin:0 0 6px;padding-inline-start:12px;border-inline-start:5px solid var(--orange)}
 .lead{color:var(--muted);margin:0 0 16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 2px 8px rgba(16,42,92,.06);display:flex;flex-direction:column;gap:8px}
-.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 2px 8px rgba(16,42,92,.06);display:flex;flex-direction:column;gap:8px;min-width:0;max-width:100%;overflow-wrap:break-word}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;min-width:0}
+.card-head h3{min-width:0}
 .card h3{margin:0;color:var(--navy);font-size:1.1rem}
 .city{background:#EEF2F9;color:var(--navy);border-radius:999px;padding:2px 10px;font-size:.8rem;white-space:nowrap}
 .desc{margin:0;font-size:.93rem}
@@ -37,10 +42,10 @@ a{color:#1d4ed8;text-decoration:none} a:hover{text-decoration:underline}
 .metrics{font-size:.82rem;color:var(--muted)}
 .meta{font-size:.76rem;color:var(--muted);border-top:1px solid #f0ebe0;padding-top:6px}
 .badge{display:inline-block;background:var(--orange);color:#fff;font-size:.72rem;font-weight:700;border-radius:6px;padding:1px 8px;vertical-align:middle}
-.tbl{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 8px rgba(16,42,92,.06)}
+.tbl{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 8px rgba(16,42,92,.06)}
 table{border-collapse:collapse;width:100%;min-width:1100px;font-size:.88rem}
 th{background:var(--navy);color:#fff;text-align:right;padding:10px;position:sticky;top:0}
-td{padding:10px;border-top:1px solid #eee7d8;vertical-align:top}
+td{padding:10px;border-top:1px solid #eee7d8;vertical-align:top;overflow-wrap:anywhere;word-break:break-word}
 tr:nth-child(even) td{background:#FCFAF5}
 .num{color:var(--muted);text-align:center}
 .sub,.sig{font-size:.78rem;color:var(--muted)}
@@ -50,12 +55,54 @@ tr:nth-child(even) td{background:#FCFAF5}
 .src a{margin-inline-end:4px;white-space:nowrap}
 .legend{font-size:.84rem;color:var(--muted);margin:8px 0 0}
 footer{background:var(--navy);color:#dbe3f3;text-align:center;padding:18px;font-size:.86rem;margin-top:40px}
+@media(max-width:860px){
+.tbl{overflow:visible;background:transparent;border:0;box-shadow:none;border-radius:0}
+table{min-width:0;width:100%;display:block}
+table thead{display:none}
+table tbody{display:flex;flex-direction:column;gap:12px}
+table tr{display:block;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 8px rgba(16,42,92,.06);overflow:hidden}
+table td,tr:nth-child(even) td{display:block;width:100%;max-width:100%;background:transparent;border-top:1px dashed #eee7d8;padding:8px 14px}
+table td::before{content:attr(data-label);display:block;font-size:.74rem;font-weight:700;color:var(--navy);opacity:.75;margin-bottom:2px}
+table td.num{background:var(--navy);color:#fff;text-align:start;border-top:0;padding:6px 14px;font-weight:700}
+table td.num::before{display:inline;content:"#";color:var(--orange);opacity:1;margin-inline-end:4px}
+table td.name{border-top:0;font-size:1rem}
+table td.name::before{display:none}
+.notes{max-width:100%}
+.ltr{white-space:normal}
+}
 @media(max-width:640px){h1{font-size:1.45rem}.upd{margin-inline-start:0}.grid{grid-template-columns:1fr}}
+@media(max-width:600px){
+body{line-height:1.6}
+.wrap{padding:0 12px}
+.hdr{padding:14px 12px;gap:10px}
+.logo{padding:2px 0}
+.logo img{height:42px}
+h1{font-size:1.3rem}
+.subtitle{font-size:.84rem}
+.upd{padding:5px 10px;font-size:.8rem}
+section{margin:18px 0}
+h2{font-size:1.12rem;padding-inline-start:9px;border-inline-start-width:4px}
+.lead{font-size:.86rem;margin:0 0 10px}
+.grid{gap:10px}
+.card{padding:12px;gap:6px;border-radius:12px}
+.card-head{flex-wrap:wrap;gap:6px}
+.card h3{font-size:1rem}
+.city{white-space:normal;font-size:.74rem}
+.desc{font-size:.88rem}
+.links{font-size:.82rem}
+.metrics{font-size:.78rem}
+.meta{font-size:.7rem}
+.legend{font-size:.78rem}
+table{font-size:.84rem}
+table tbody{gap:10px}
+table td,tr:nth-child(even) td{padding:7px 12px}
+footer{padding:14px 12px;font-size:.78rem;margin-top:24px;overflow-wrap:anywhere}
+}
 </style>
 </head>
 <body>
 <header><div class="wrap hdr">
-  <div class="logo"><img src="data:image/png;base64,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" alt="أبرج"></div>
+  <div class="logo"><img src="data:image/png;base64,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" alt="أبرج"></div>
   <div><h1>صفحة المراقبة</h1><p class="subtitle">مراقبة المنافسين والعملاء المحتملين لمؤسسة أبرج للإنشاءات المتكاملة — الخبر والدمام · 29 أكتوبر 2026</p></div>
   <div class="upd">آخر تحديث: <b dir="ltr">2026-10-29</b></div>
 </div></header>
@@ -138,165 +185,165 @@ footer{background:var(--navy);color:#dbe3f3;text-align:center;padding:18px;font-
   <div class="tbl"><table>
     <thead><tr><th>#</th><th>الاسم / الإشارة</th><th>المدينة / الحي</th><th>رقم التواصل</th><th>من نفّذ المكان (المقاول)</th><th>تعاقد مع منافس؟</th><th>المالك / المؤسس</th><th>ملاحظات</th><th>المصدر</th></tr></thead>
     <tbody><tr>
-  <td class="num">1</td>
-  <td><b>Le Café LPM (لا بوتيت ميزون)</b> <span class="badge">تحديث</span><div class="sig">افتتاح قريب</div></td>
-  <td>الخبر<div class="sub">باي فرونت — كورنيش الخبر</div></td>
-  <td class="ltr">غير متوفر</td>
-  <td>غير معروف</td>
-  <td>غير معروف</td>
-  <td>La Petite Maison (الرئيس التنفيذي: نيكولا بودزينسكي)؛ مالك المشروع: مجموعة المهيدب، المطوّر: اجدان</td>
-  <td class="notes">مطعم وكافيه فرنسي؛ الافتتاح المعلن سبتمبر/أكتوبر 2026.</td>
-  <td class="src"><a href="https://muhaidib.com/ar/article/al-muhaidib-group-partners-with-le-cafe-lpm-at-bayfront-al-khobar" target="_blank" rel="noopener">[1]</a> <a href="https://platinumlist.net/guide/ar/la-petite-maison-is-opening-in-al-khobar-this-october/" target="_blank" rel="noopener">[2]</a></td>
+  <td class="num" data-label="#">1</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>Le Café LPM (لا بوتيت ميزون)</b> <span class="badge">تحديث</span><div class="sig">افتتاح قريب</div></td>
+  <td data-label="المدينة / الحي">الخبر<div class="sub">باي فرونت — كورنيش الخبر</div></td>
+  <td class="ltr" data-label="رقم التواصل">غير متوفر</td>
+  <td data-label="من نفّذ المكان (المقاول)">غير معروف</td>
+  <td data-label="تعاقد مع منافس؟">غير معروف</td>
+  <td data-label="المالك / المؤسس">La Petite Maison (الرئيس التنفيذي: نيكولا بودزينسكي)؛ مالك المشروع: مجموعة المهيدب، المطوّر: اجدان</td>
+  <td class="notes" data-label="ملاحظات">مطعم وكافيه فرنسي؛ الافتتاح المعلن سبتمبر/أكتوبر 2026.</td>
+  <td class="src" data-label="المصدر"><a href="https://muhaidib.com/ar/article/al-muhaidib-group-partners-with-le-cafe-lpm-at-bayfront-al-khobar" target="_blank" rel="noopener">[1]</a> <a href="https://platinumlist.net/guide/ar/la-petite-maison-is-opening-in-al-khobar-this-october/" target="_blank" rel="noopener">[2]</a></td>
 </tr><tr>
-  <td class="num">2</td>
-  <td><b>مطاعم ومقاهي الشبيلي جراند مول (Joe &amp; The Juice، Urth Caffé وغيرها)</b> <span class="badge">تحديث</span><div class="sig">افتتاح قريب</div></td>
-  <td>الخبر<div class="sub">الشبيلي جراند مول</div></td>
-  <td class="ltr">غير متوفر</td>
-  <td>غير معروف</td>
-  <td>غير معروف</td>
-  <td>المطوّر/المؤجر: الإيسار العربية (Arabian AlEsaar)</td>
-  <td class="notes">مول قيد الافتتاح يستقطب علامات مطاعم ومقاهٍ عالمية — فرصة فيت أوت لوحدات المستأجرين (تواصل عبر إدارة التأجير).</td>
-  <td class="src"><a href="https://ae.linkedin.com/posts/saudihubsa_saudihub-alshubailygrandmall-alkhobar-activity-7513938646660694016-32xT" target="_blank" rel="noopener">[1]</a></td>
+  <td class="num" data-label="#">2</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>مطاعم ومقاهي الشبيلي جراند مول (Joe &amp; The Juice، Urth Caffé وغيرها)</b> <span class="badge">تحديث</span><div class="sig">افتتاح قريب</div></td>
+  <td data-label="المدينة / الحي">الخبر<div class="sub">الشبيلي جراند مول</div></td>
+  <td class="ltr" data-label="رقم التواصل">غير متوفر</td>
+  <td data-label="من نفّذ المكان (المقاول)">غير معروف</td>
+  <td data-label="تعاقد مع منافس؟">غير معروف</td>
+  <td data-label="المالك / المؤسس">المطوّر/المؤجر: الإيسار العربية (Arabian AlEsaar)</td>
+  <td class="notes" data-label="ملاحظات">مول قيد الافتتاح يستقطب علامات مطاعم ومقاهٍ عالمية — فرصة فيت أوت لوحدات المستأجرين (تواصل عبر إدارة التأجير).</td>
+  <td class="src" data-label="المصدر"><a href="https://ae.linkedin.com/posts/saudihubsa_saudihub-alshubailygrandmall-alkhobar-activity-7513938646660694016-32xT" target="_blank" rel="noopener">[1]</a></td>
 </tr><tr>
-  <td class="num">3</td>
-  <td><b>ليفه Leffah — الفرع الرابع</b> <span class="badge">تحديث</span><div class="sig">فرع جديد</div></td>
-  <td>الدمام<div class="sub">حي الشاطئ (قرب لولو مول)</div></td>
-  <td class="ltr">+966920026007 (الشركة الأم)</td>
-  <td>غير معروف</td>
-  <td>غير معروف</td>
-  <td>شركة نهلة الوادي التجارية (Nahla Al Wadi Trading Co.)</td>
-  <td class="notes">افتتاح تجريبي 22 أكتوبر 2026 للفرع الرابع في المنطقة الشرقية — علامة في توسع.</td>
-  <td class="src"><a href="https://nahlaalwadi.com/news-and-events/leffah-celebrates-soft-opening-of-its-4th-branch-in-dammam-s-ash-shati-district" target="_blank" rel="noopener">[1]</a></td>
+  <td class="num" data-label="#">3</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>ليفه Leffah — الفرع الرابع</b> <span class="badge">تحديث</span><div class="sig">فرع جديد</div></td>
+  <td data-label="المدينة / الحي">الدمام<div class="sub">حي الشاطئ (قرب لولو مول)</div></td>
+  <td class="ltr" data-label="رقم التواصل">+966920026007 (الشركة الأم)</td>
+  <td data-label="من نفّذ المكان (المقاول)">غير معروف</td>
+  <td data-label="تعاقد مع منافس؟">غير معروف</td>
+  <td data-label="المالك / المؤسس">شركة نهلة الوادي التجارية (Nahla Al Wadi Trading Co.)</td>
+  <td class="notes" data-label="ملاحظات">افتتاح تجريبي 22 أكتوبر 2026 للفرع الرابع في المنطقة الشرقية — علامة في توسع.</td>
+  <td class="src" data-label="المصدر"><a href="https://nahlaalwadi.com/news-and-events/leffah-celebrates-soft-opening-of-its-4th-branch-in-dammam-s-ash-shati-district" target="_blank" rel="noopener">[1]</a></td>
 </tr><tr>
-  <td class="num">4</td>
-  <td><b>كوبلانت Coplant Coffee &amp; Dessert</b> <span class="badge">تحديث</span><div class="sig">فرع جديد</div></td>
-  <td>الدمام / الخبر<div class="sub">طريق الملك فهد (الدمام) + فرع الخبر</div></td>
-  <td class="ltr">+966568588056</td>
-  <td>غير معروف</td>
-  <td>غير معروف</td>
-  <td>غير متوفر</td>
-  <td class="notes">منشور 23/10/2026 يعلن فرع الخبر؛ فروع في الدمام والخبر والقطيف. الموقع: coplant.sa</td>
-  <td class="src"><a href="https://www.restaurants10.com/SA/Dammam/1203889566401300/Coplant-Coffee-%26-Dessert" target="_blank" rel="noopener">[1]</a></td>
+  <td class="num" data-label="#">4</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>كوبلانت Coplant Coffee &amp; Dessert</b> <span class="badge">تحديث</span><div class="sig">فرع جديد</div></td>
+  <td data-label="المدينة / الحي">الدمام / الخبر<div class="sub">طريق الملك فهد (الدمام) + فرع الخبر</div></td>
+  <td class="ltr" data-label="رقم التواصل">+966568588056</td>
+  <td data-label="من نفّذ المكان (المقاول)">غير معروف</td>
+  <td data-label="تعاقد مع منافس؟">غير معروف</td>
+  <td data-label="المالك / المؤسس">غير متوفر</td>
+  <td class="notes" data-label="ملاحظات">منشور 23/10/2026 يعلن فرع الخبر؛ فروع في الدمام والخبر والقطيف. الموقع: coplant.sa</td>
+  <td class="src" data-label="المصدر"><a href="https://www.restaurants10.com/SA/Dammam/1203889566401300/Coplant-Coffee-%26-Dessert" target="_blank" rel="noopener">[1]</a></td>
 </tr><tr>
-  <td class="num">5</td>
-  <td><b>ارتشي ARCHI</b> <span class="badge">تحديث</span><div class="sig">توسع سريع</div></td>
-  <td>الخبر<div class="sub">باي فرونت — الكورنيش</div></td>
-  <td class="ltr">غير متوفر</td>
-  <td>غير معروف</td>
-  <td>غير معروف</td>
-  <td>غير متوفر</td>
-  <td class="notes">افتتح Archi Beach Club (الفرع الستون) سبتمبر 2026؛ علامة محلية سريعة التوسع بدأت بالخبر 2021.</td>
-  <td class="src"><a href="https://whatsonsaudiarabia.com/2026/09/archi-saudi-cafe-new-beachfront-spot-in-al-khobar/" target="_blank" rel="noopener">[1]</a></td>
+  <td class="num" data-label="#">5</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>ارتشي ARCHI</b> <span class="badge">تحديث</span><div class="sig">توسع سريع</div></td>
+  <td data-label="المدينة / الحي">الخبر<div class="sub">باي فرونت — الكورنيش</div></td>
+  <td class="ltr" data-label="رقم التواصل">غير متوفر</td>
+  <td data-label="من نفّذ المكان (المقاول)">غير معروف</td>
+  <td data-label="تعاقد مع منافس؟">غير معروف</td>
+  <td data-label="المالك / المؤسس">غير متوفر</td>
+  <td class="notes" data-label="ملاحظات">افتتح Archi Beach Club (الفرع الستون) سبتمبر 2026؛ علامة محلية سريعة التوسع بدأت بالخبر 2021.</td>
+  <td class="src" data-label="المصدر"><a href="https://whatsonsaudiarabia.com/2026/09/archi-saudi-cafe-new-beachfront-spot-in-al-khobar/" target="_blank" rel="noopener">[1]</a></td>
 </tr><tr>
-  <td class="num">6</td>
-  <td><b>مشراق ساندوتش</b> <span class="badge">تحديث</span><div class="sig">توسع</div></td>
-  <td>الخبر<div class="sub">الراكة</div></td>
-  <td class="ltr">غير متوفر</td>
-  <td>غير معروف</td>
-  <td>غير معروف</td>
-  <td>غير متوفر</td>
-  <td class="notes">افتتاح فرع الراكة مايو 2026 ضمن خطة توسع في المنطقة الشرقية.</td>
-  <td class="src"><a href="https://franchising.sa/article/5537/fra-jdyad-lalamha-mshraqa-sandwayash-fya-alrakha/" target="_blank" rel="noopener">[1]</a></td>
+  <td class="num" data-label="#">6</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>مشراق ساندوتش</b> <span class="badge">تحديث</span><div class="sig">توسع</div></td>
+  <td data-label="المدينة / الحي">الخبر<div class="sub">الراكة</div></td>
+  <td class="ltr" data-label="رقم التواصل">غير متوفر</td>
+  <td data-label="من نفّذ المكان (المقاول)">غير معروف</td>
+  <td data-label="تعاقد مع منافس؟">غير معروف</td>
+  <td data-label="المالك / المؤسس">غير متوفر</td>
+  <td class="notes" data-label="ملاحظات">افتتاح فرع الراكة مايو 2026 ضمن خطة توسع في المنطقة الشرقية.</td>
+  <td class="src" data-label="المصدر"><a href="https://franchising.sa/article/5537/fra-jdyad-lalamha-mshraqa-sandwayash-fya-alrakha/" target="_blank" rel="noopener">[1]</a></td>
 </tr><tr>
-  <td class="num">7</td>
-  <td><b>Tea Time — التركي سنتر</b> <span class="badge">تحديث</span><div class="sig">افتتاح حديث</div></td>
-  <td>الخبر<div class="sub">مجمع التركي سنتر</div></td>
-  <td class="ltr">غير متوفر</td>
-  <td>غير معروف</td>
-  <td>غير معروف</td>
-  <td>غير متوفر</td>
-  <td class="notes">افتتاح فبراير 2026 في مجمع التركي سنتر (مجموعة التركي) — مؤشر لتوسع العلامة.</td>
-  <td class="src"><a href="https://ae.linkedin.com/posts/jaber-alqahtani-3555b7163_%D8%A7%D9%84%D8%AA%D8%B1%D9%83%D9%8A%D8%B3%D9%86%D8%AA%D8%B1-%D8%A7%D9%84%D8%AE%D8%A8%D8%B1-activity-7428814868667035648-U4l6" target="_blank" rel="noopener">[1]</a></td>
+  <td class="num" data-label="#">7</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>Tea Time — التركي سنتر</b> <span class="badge">تحديث</span><div class="sig">افتتاح حديث</div></td>
+  <td data-label="المدينة / الحي">الخبر<div class="sub">مجمع التركي سنتر</div></td>
+  <td class="ltr" data-label="رقم التواصل">غير متوفر</td>
+  <td data-label="من نفّذ المكان (المقاول)">غير معروف</td>
+  <td data-label="تعاقد مع منافس؟">غير معروف</td>
+  <td data-label="المالك / المؤسس">غير متوفر</td>
+  <td class="notes" data-label="ملاحظات">افتتاح فبراير 2026 في مجمع التركي سنتر (مجموعة التركي) — مؤشر لتوسع العلامة.</td>
+  <td class="src" data-label="المصدر"><a href="https://ae.linkedin.com/posts/jaber-alqahtani-3555b7163_%D8%A7%D9%84%D8%AA%D8%B1%D9%83%D9%8A%D8%B3%D9%86%D8%AA%D8%B1-%D8%A7%D9%84%D8%AE%D8%A8%D8%B1-activity-7428814868667035648-U4l6" target="_blank" rel="noopener">[1]</a></td>
 </tr><tr>
-  <td class="num">8</td>
-  <td><b>DeFlore Café</b> <span class="badge">تحديث</span><div class="sig">عميل منافس</div></td>
-  <td>الخبر<div class="sub">فيلاجيو + شمال الخبر</div></td>
-  <td class="ltr">غير متوفر</td>
-  <td>BIKAR (تصميم وتنفيذ 2024)</td>
-  <td>نعم — BIKAR</td>
-  <td>غير متوفر</td>
-  <td class="notes">فرعان نفذهما منافس؛ فرصة للفروع القادمة أو الصيانة.</td>
-  <td class="src"><a href="https://soordb.com/en/bikarinteriors" target="_blank" rel="noopener">[1]</a> <a href="https://www.behance.net/bikarinter15d0" target="_blank" rel="noopener">[2]</a></td>
+  <td class="num" data-label="#">8</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>DeFlore Café</b> <span class="badge">تحديث</span><div class="sig">عميل منافس</div></td>
+  <td data-label="المدينة / الحي">الخبر<div class="sub">فيلاجيو + شمال الخبر</div></td>
+  <td class="ltr" data-label="رقم التواصل">غير متوفر</td>
+  <td data-label="من نفّذ المكان (المقاول)">BIKAR (تصميم وتنفيذ 2024)</td>
+  <td data-label="تعاقد مع منافس؟">نعم — BIKAR</td>
+  <td data-label="المالك / المؤسس">غير متوفر</td>
+  <td class="notes" data-label="ملاحظات">فرعان نفذهما منافس؛ فرصة للفروع القادمة أو الصيانة.</td>
+  <td class="src" data-label="المصدر"><a href="https://soordb.com/en/bikarinteriors" target="_blank" rel="noopener">[1]</a> <a href="https://www.behance.net/bikarinter15d0" target="_blank" rel="noopener">[2]</a></td>
 </tr><tr>
-  <td class="num">9</td>
-  <td><b>Chemistry Gardens</b> <span class="badge">تحديث</span><div class="sig">عميل منافس</div></td>
-  <td>الخبر<div class="sub"></div></td>
-  <td class="ltr">غير متوفر</td>
-  <td>Adzone (تصميم)</td>
-  <td>نعم — Adzone</td>
-  <td>غير متوفر</td>
-  <td class="notes">مقهى حائز على جوائز تصميم؛ له فرع في تبوك أيضاً — علامة في توسع.</td>
-  <td class="src"><a href="https://www.adzone.com.sa/projects" target="_blank" rel="noopener">[1]</a></td>
+  <td class="num" data-label="#">9</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>Chemistry Gardens</b> <span class="badge">تحديث</span><div class="sig">عميل منافس</div></td>
+  <td data-label="المدينة / الحي">الخبر<div class="sub"></div></td>
+  <td class="ltr" data-label="رقم التواصل">غير متوفر</td>
+  <td data-label="من نفّذ المكان (المقاول)">Adzone (تصميم)</td>
+  <td data-label="تعاقد مع منافس؟">نعم — Adzone</td>
+  <td data-label="المالك / المؤسس">غير متوفر</td>
+  <td class="notes" data-label="ملاحظات">مقهى حائز على جوائز تصميم؛ له فرع في تبوك أيضاً — علامة في توسع.</td>
+  <td class="src" data-label="المصدر"><a href="https://www.adzone.com.sa/projects" target="_blank" rel="noopener">[1]</a></td>
 </tr><tr>
-  <td class="num">10</td>
-  <td><b>Equal Cafe / Drive Thru</b> <span class="badge">تحديث</span><div class="sig">عميل منافس</div></td>
-  <td>الخبر / الدمام<div class="sub">الخبر، الدمام، الظهران (+ الرياض والطائف)</div></td>
-  <td class="ltr">غير متوفر</td>
-  <td>Adzone (تصميم)</td>
-  <td>نعم — Adzone</td>
-  <td>غير متوفر</td>
-  <td class="notes">سلسلة متعددة الفروع — فرص فروع جديدة.</td>
-  <td class="src"><a href="https://www.adzone.com.sa/projects" target="_blank" rel="noopener">[1]</a></td>
+  <td class="num" data-label="#">10</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>Equal Cafe / Drive Thru</b> <span class="badge">تحديث</span><div class="sig">عميل منافس</div></td>
+  <td data-label="المدينة / الحي">الخبر / الدمام<div class="sub">الخبر، الدمام، الظهران (+ الرياض والطائف)</div></td>
+  <td class="ltr" data-label="رقم التواصل">غير متوفر</td>
+  <td data-label="من نفّذ المكان (المقاول)">Adzone (تصميم)</td>
+  <td data-label="تعاقد مع منافس؟">نعم — Adzone</td>
+  <td data-label="المالك / المؤسس">غير متوفر</td>
+  <td class="notes" data-label="ملاحظات">سلسلة متعددة الفروع — فرص فروع جديدة.</td>
+  <td class="src" data-label="المصدر"><a href="https://www.adzone.com.sa/projects" target="_blank" rel="noopener">[1]</a></td>
 </tr><tr>
-  <td class="num">11</td>
-  <td><b>Grambon Cafe جرام بن كافيه</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
-  <td>الخبر<div class="sub">الراكة الجنوبية (شارع غرناطة)</div></td>
-  <td class="ltr">+966593890704</td>
-  <td>غير معروف</td>
-  <td>غير معروف</td>
-  <td>غير متوفر (مراجعة عميل على reviewsaudi تذكر &#x27;صاحب المكان أ. فواز&#x27; — غير مؤكد رسمياً)</td>
-  <td class="notes">مسؤول المطعم: Fawaz AlMohaisen — Small Business Manager - Grambon Cafe منذ 04/2019 (حسب LinkedIn) | مقهى مختص مستقل. فرع ثانٍ: Grambon Cafe - K Plaza، شارع سويكت، الخبر الشمالية، هاتف +966567456898 (exa.ai/library/place/zhflg1rlhmp). مصادر الأشخاص: https://linkedin.com/in/fawaz-almohaisen-6986778 ; https://reviewsaudi.com/eastern-region/grambon-cafe-166160</td>
-  <td class="src"><a href="https://sa.arabplaces.com/eastern-region/grambon-cafe-451074" target="_blank" rel="noopener">[1]</a> <a href="https://niche3ar.price-ksa.com/annuaire/grambon-cafe-%D8%AC%D8%B1%D8%A7%D9%85-%D8%A8%D9%86-%D9%83%D8%A7%D9%81%D9%8A%D9%87-raka-%D8%A7%D9%84%D8%B1%D8%A7%D9%83%D9%87-%D8%A7%D9%84%D8%AE%D8%A8%D8%B1-966-59-389-0704/" target="_blank" rel="noopener">[2]</a></td>
+  <td class="num" data-label="#">11</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>Grambon Cafe جرام بن كافيه</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
+  <td data-label="المدينة / الحي">الخبر<div class="sub">الراكة الجنوبية (شارع غرناطة)</div></td>
+  <td class="ltr" data-label="رقم التواصل">+966593890704</td>
+  <td data-label="من نفّذ المكان (المقاول)">غير معروف</td>
+  <td data-label="تعاقد مع منافس؟">غير معروف</td>
+  <td data-label="المالك / المؤسس">غير متوفر (مراجعة عميل على reviewsaudi تذكر &#x27;صاحب المكان أ. فواز&#x27; — غير مؤكد رسمياً)</td>
+  <td class="notes" data-label="ملاحظات">مسؤول المطعم: Fawaz AlMohaisen — Small Business Manager - Grambon Cafe منذ 04/2019 (حسب LinkedIn) | مقهى مختص مستقل. فرع ثانٍ: Grambon Cafe - K Plaza، شارع سويكت، الخبر الشمالية، هاتف +966567456898 (exa.ai/library/place/zhflg1rlhmp). مصادر الأشخاص: https://linkedin.com/in/fawaz-almohaisen-6986778 ; https://reviewsaudi.com/eastern-region/grambon-cafe-166160</td>
+  <td class="src" data-label="المصدر"><a href="https://sa.arabplaces.com/eastern-region/grambon-cafe-451074" target="_blank" rel="noopener">[1]</a> <a href="https://niche3ar.price-ksa.com/annuaire/grambon-cafe-%D8%AC%D8%B1%D8%A7%D9%85-%D8%A8%D9%86-%D9%83%D8%A7%D9%81%D9%8A%D9%87-raka-%D8%A7%D9%84%D8%B1%D8%A7%D9%83%D9%87-%D8%A7%D9%84%D8%AE%D8%A8%D8%B1-966-59-389-0704/" target="_blank" rel="noopener">[2]</a></td>
 </tr><tr>
-  <td class="num">12</td>
-  <td><b>Mou&#x27;s Kitchen</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
-  <td>الخبر<div class="sub">العقربية (شارع الأبرار)</div></td>
-  <td class="ltr">+9668001111827</td>
-  <td>غير معروف</td>
-  <td>غير معروف</td>
-  <td>Development &amp; Supply Co. Ltd. (الشركة الأم التي أعلنت إطلاق Mou&#x27;s Kitchen)</td>
-  <td class="notes">مطبخ مركزي/سحابي (cloud kitchen) في الخبر يقدم تموين ومخبوزات. Bala Subramanian — Executive Co-Chef لدى Development &amp; Supply Co. Ltd. (LinkedIn). المصادر: https://www.linkedin.com/posts/dev-supply-co-ltd_mouskitchen-alkhobar-saudiarabia-activity-7503925668141899776-nCCP ; https://linkedin.com/company/dev-supply-co-ltd ; https://linkedin.com/in/bala-subramanian-b6793289</td>
-  <td class="src"><a href="https://exa.ai/library/places?q=81ecfcca2e41a5de" target="_blank" rel="noopener">[1]</a> <a href="https://maps.yango.com/en-sa/org/212757176170/" target="_blank" rel="noopener">[2]</a></td>
+  <td class="num" data-label="#">12</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>Mou&#x27;s Kitchen</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
+  <td data-label="المدينة / الحي">الخبر<div class="sub">العقربية (شارع الأبرار)</div></td>
+  <td class="ltr" data-label="رقم التواصل">+9668001111827</td>
+  <td data-label="من نفّذ المكان (المقاول)">غير معروف</td>
+  <td data-label="تعاقد مع منافس؟">غير معروف</td>
+  <td data-label="المالك / المؤسس">Development &amp; Supply Co. Ltd. (الشركة الأم التي أعلنت إطلاق Mou&#x27;s Kitchen)</td>
+  <td class="notes" data-label="ملاحظات">مطبخ مركزي/سحابي (cloud kitchen) في الخبر يقدم تموين ومخبوزات. Bala Subramanian — Executive Co-Chef لدى Development &amp; Supply Co. Ltd. (LinkedIn). المصادر: https://www.linkedin.com/posts/dev-supply-co-ltd_mouskitchen-alkhobar-saudiarabia-activity-7503925668141899776-nCCP ; https://linkedin.com/company/dev-supply-co-ltd ; https://linkedin.com/in/bala-subramanian-b6793289</td>
+  <td class="src" data-label="المصدر"><a href="https://exa.ai/library/places?q=81ecfcca2e41a5de" target="_blank" rel="noopener">[1]</a> <a href="https://maps.yango.com/en-sa/org/212757176170/" target="_blank" rel="noopener">[2]</a></td>
 </tr><tr>
-  <td class="num">13</td>
-  <td><b>Spark Mood Cafe سبارك كافيه</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
-  <td>الخبر<div class="sub">الراكة الجنوبية (طريق الأمير سلطان)</div></td>
-  <td class="ltr">+966506450585</td>
-  <td>غير معروف</td>
-  <td>غير معروف</td>
-  <td>غير متوفر</td>
-  <td class="notes">مسؤول المطعم: مذكور في مراجعات عملاء فقط (الاسم الأول): &#x27;Shrouk, the manager&#x27; (مراجعة 03/2025)، و&#x27;مديرة الصالة مدام نجوان&#x27; (مراجعة 03/2023) — غير مؤكد رسمياً | مقهى وشيشة مستقل، تراس خارجي. إنستغرام: instagram.com/sparkcafemood. مراجعة تذكر أن مالك البرج (المبنى) مهمل في نظافة المدخل — فرصة صيانة/تجديد. المصادر: https://exa.ai/library/place/qgl71r8gxjw ; https://sa.arabplaces.com/eastern-region/spark-cafe-500835</td>
-  <td class="src"><a href="https://sa.arabplaces.com/eastern-region/spark-cafe-500835" target="_blank" rel="noopener">[1]</a> <a href="https://exa.ai/library/place/qgl71r8gxjw" target="_blank" rel="noopener">[2]</a></td>
+  <td class="num" data-label="#">13</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>Spark Mood Cafe سبارك كافيه</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
+  <td data-label="المدينة / الحي">الخبر<div class="sub">الراكة الجنوبية (طريق الأمير سلطان)</div></td>
+  <td class="ltr" data-label="رقم التواصل">+966506450585</td>
+  <td data-label="من نفّذ المكان (المقاول)">غير معروف</td>
+  <td data-label="تعاقد مع منافس؟">غير معروف</td>
+  <td data-label="المالك / المؤسس">غير متوفر</td>
+  <td class="notes" data-label="ملاحظات">مسؤول المطعم: مذكور في مراجعات عملاء فقط (الاسم الأول): &#x27;Shrouk, the manager&#x27; (مراجعة 03/2025)، و&#x27;مديرة الصالة مدام نجوان&#x27; (مراجعة 03/2023) — غير مؤكد رسمياً | مقهى وشيشة مستقل، تراس خارجي. إنستغرام: instagram.com/sparkcafemood. مراجعة تذكر أن مالك البرج (المبنى) مهمل في نظافة المدخل — فرصة صيانة/تجديد. المصادر: https://exa.ai/library/place/qgl71r8gxjw ; https://sa.arabplaces.com/eastern-region/spark-cafe-500835</td>
+  <td class="src" data-label="المصدر"><a href="https://sa.arabplaces.com/eastern-region/spark-cafe-500835" target="_blank" rel="noopener">[1]</a> <a href="https://exa.ai/library/place/qgl71r8gxjw" target="_blank" rel="noopener">[2]</a></td>
 </tr><tr>
-  <td class="num">14</td>
-  <td><b>شاي بخار - فرع الفيصلية</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
-  <td>الدمام<div class="sub">الفيصلية (شارع عمر بن الخطاب)</div></td>
-  <td class="ltr">0591703931</td>
-  <td>غير معروف</td>
-  <td>غير معروف</td>
-  <td>عبدالله الشهري (المؤسس والمالك)</td>
-  <td class="notes">علامة سعودية بدأت من بوفيه الشاطئ بخميس مشيط. فروع: العقربية-الخبر 0593406835، كورنيش الخبر، الرياض، العلا. واتساب الإدارة 0598074525. وسيط الامتياز: الشركة الوطنية للامتيازات nf.com.sa. المصادر: https://saudiarestaurants.com/%D8%B4%D8%A7%D9%8A-%D8%A8%D8%AE%D8%A7%D8%B1/ ; https://www.rowadalaamal.com/%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%84%D9%87-%D8%A7%D9%84%D8%B4%D9%87%D8%B1%D9%8A-%D9%8A%D8%B3%D8%B1%D8%AF-%D9%82%D8%B5%D8%A9-%D9%86%D8%AC%D8%A7%D8%AD-%D9%85%D8%B4%D8%B1%D9%88%D8%B9-%D8%B4%D8%A7%D9%8A/ ; https://www.nf.com.sa/ar/our-brand-1/%D8%B4%D8%A7%D9%8A-%D8%A8%D8%AE%D8%A7%D8%B1</td>
-  <td class="src"><a href="https://saudiarestaurants.com/%D8%B4%D8%A7%D9%8A-%D8%A8%D8%AE%D8%A7%D8%B1/" target="_blank" rel="noopener">[1]</a></td>
+  <td class="num" data-label="#">14</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>شاي بخار - فرع الفيصلية</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
+  <td data-label="المدينة / الحي">الدمام<div class="sub">الفيصلية (شارع عمر بن الخطاب)</div></td>
+  <td class="ltr" data-label="رقم التواصل">0591703931</td>
+  <td data-label="من نفّذ المكان (المقاول)">غير معروف</td>
+  <td data-label="تعاقد مع منافس؟">غير معروف</td>
+  <td data-label="المالك / المؤسس">عبدالله الشهري (المؤسس والمالك)</td>
+  <td class="notes" data-label="ملاحظات">علامة سعودية بدأت من بوفيه الشاطئ بخميس مشيط. فروع: العقربية-الخبر 0593406835، كورنيش الخبر، الرياض، العلا. واتساب الإدارة 0598074525. وسيط الامتياز: الشركة الوطنية للامتيازات nf.com.sa. المصادر: https://saudiarestaurants.com/%D8%B4%D8%A7%D9%8A-%D8%A8%D8%AE%D8%A7%D8%B1/ ; https://www.rowadalaamal.com/%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%84%D9%87-%D8%A7%D9%84%D8%B4%D9%87%D8%B1%D9%8A-%D9%8A%D8%B3%D8%B1%D8%AF-%D9%82%D8%B5%D8%A9-%D9%86%D8%AC%D8%A7%D8%AD-%D9%85%D8%B4%D8%B1%D9%88%D8%B9-%D8%B4%D8%A7%D9%8A/ ; https://www.nf.com.sa/ar/our-brand-1/%D8%B4%D8%A7%D9%8A-%D8%A8%D8%AE%D8%A7%D8%B1</td>
+  <td class="src" data-label="المصدر"><a href="https://saudiarestaurants.com/%D8%B4%D8%A7%D9%8A-%D8%A8%D8%AE%D8%A7%D8%B1/" target="_blank" rel="noopener">[1]</a></td>
 </tr><tr>
-  <td class="num">15</td>
-  <td><b>محمصة ومقهى جراف Graph Cafe</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
-  <td>الدمام<div class="sub">الفيصلية (طريق الظهران الجبيل الفرعي)</div></td>
-  <td class="ltr">+966556627595</td>
-  <td>غير معروف</td>
-  <td>غير معروف</td>
-  <td>غير متوفر</td>
-  <td class="notes">مسؤول المطعم: Borhan eldin Mohammed — Operations Manager - Graph Coffee منذ 10/2025 (LinkedIn) | محمصة ومقهى محلي، دورين ودرج حلزوني (ملاحظة من مراجعات: قلة الطاولات بالدور الثاني). Abdallah Abu Bakr — Purchasing Manager منذ 07/2024 (LinkedIn). متجر: graph-sa.com. المصادر: https://linkedin.com/in/borhan-eldin-mohammed-373912ba ; https://linkedin.com/in/abdallah-abu-bakr-691603123 ; https://linkedin.com/company/graph-coffee</td>
-  <td class="src"><a href="https://exa.ai/library/place/z04pgf90214" target="_blank" rel="noopener">[1]</a> <a href="https://www.alsharqiacafes.com/2020/%d9%83%d8%a7%d9%81%d9%8a%d9%87-%d8%ac%d8%b1%d8%a7%d9%81/" target="_blank" rel="noopener">[2]</a></td>
+  <td class="num" data-label="#">15</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>محمصة ومقهى جراف Graph Cafe</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
+  <td data-label="المدينة / الحي">الدمام<div class="sub">الفيصلية (طريق الظهران الجبيل الفرعي)</div></td>
+  <td class="ltr" data-label="رقم التواصل">+966556627595</td>
+  <td data-label="من نفّذ المكان (المقاول)">غير معروف</td>
+  <td data-label="تعاقد مع منافس؟">غير معروف</td>
+  <td data-label="المالك / المؤسس">غير متوفر</td>
+  <td class="notes" data-label="ملاحظات">مسؤول المطعم: Borhan eldin Mohammed — Operations Manager - Graph Coffee منذ 10/2025 (LinkedIn) | محمصة ومقهى محلي، دورين ودرج حلزوني (ملاحظة من مراجعات: قلة الطاولات بالدور الثاني). Abdallah Abu Bakr — Purchasing Manager منذ 07/2024 (LinkedIn). متجر: graph-sa.com. المصادر: https://linkedin.com/in/borhan-eldin-mohammed-373912ba ; https://linkedin.com/in/abdallah-abu-bakr-691603123 ; https://linkedin.com/company/graph-coffee</td>
+  <td class="src" data-label="المصدر"><a href="https://exa.ai/library/place/z04pgf90214" target="_blank" rel="noopener">[1]</a> <a href="https://www.alsharqiacafes.com/2020/%d9%83%d8%a7%d9%81%d9%8a%d9%87-%d8%ac%d8%b1%d8%a7%d9%81/" target="_blank" rel="noopener">[2]</a></td>
 </tr><tr>
-  <td class="num">16</td>
-  <td><b>دوز كافيه Dose Cafe - فرع الشاطئ</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
-  <td>الدمام<div class="sub">الشاطئ الغربي (طريق الأمير محمد بن فهد، مقابل لولو)</div></td>
-  <td class="ltr">0536632657</td>
-  <td>غير معروف لهذا الفرع</td>
-  <td>نعم — BIKAR (تصميم وتنفيذ فرع الياسمين بالرياض 2019)</td>
-  <td>Abdullah A. Al Arfaj — Founder &amp; CEO (01/2017–10/2024 حسب LinkedIn)؛ موقع saudiarestaurants (2019) يذكر &#x27;صاحب المقهى جاسم العبوه&#x27;</td>
-  <td class="notes">سلسلة (ليست مستقلة): 70+ فرع بالسعودية؛ الكيان: Coffee Taste Company حسب LinkedIn المؤسس؛ أصبحت مملوكة سعودياً بالكامل. emad thabet — Food Division Director (LinkedIn الشركة). فرع الفيصلية بالدمام: mat3am.net يذكر +966562222411 بينما saudiarestaurants ينسب الرقم نفسه لفرع الراكة بالخبر (تعارض). المصادر: https://linkedin.com/in/abdullah-a-al-arfaj-mba-cert-dir-74850b60 ; https://franchisemarket.co/dose-cafe/ ; https://linkedin.com/company/dose-cafe</td>
-  <td class="src"><a href="https://saudiarestaurants.com/%D8%AF%D9%88%D8%B2-%D9%83%D8%A7%D9%81%D9%8A%D9%87-dose-cafe/" target="_blank" rel="noopener">[1]</a> <a href="https://soordb.com/en/bikarinteriors" target="_blank" rel="noopener">[2]</a></td>
+  <td class="num" data-label="#">16</td>
+  <td class="name" data-label="الاسم / الإشارة"><b>دوز كافيه Dose Cafe - فرع الشاطئ</b> <span class="badge">تحديث</span><div class="sig">من قائمة المطاعم المُعدّة</div></td>
+  <td data-label="المدينة / الحي">الدمام<div class="sub">الشاطئ الغربي (طريق الأمير محمد بن فهد، مقابل لولو)</div></td>
+  <td class="ltr" data-label="رقم التواصل">0536632657</td>
+  <td data-label="من نفّذ المكان (المقاول)">غير معروف لهذا الفرع</td>
+  <td data-label="تعاقد مع منافس؟">نعم — BIKAR (تصميم وتنفيذ فرع الياسمين بالرياض 2019)</td>
+  <td data-label="المالك / المؤسس">Abdullah A. Al Arfaj — Founder &amp; CEO (01/2017–10/2024 حسب LinkedIn)؛ موقع saudiarestaurants (2019) يذكر &#x27;صاحب المقهى جاسم العبوه&#x27;</td>
+  <td class="notes" data-label="ملاحظات">سلسلة (ليست مستقلة): 70+ فرع بالسعودية؛ الكيان: Coffee Taste Company حسب LinkedIn المؤسس؛ أصبحت مملوكة سعودياً بالكامل. emad thabet — Food Division Director (LinkedIn الشركة). فرع الفيصلية بالدمام: mat3am.net يذكر +966562222411 بينما saudiarestaurants ينسب الرقم نفسه لفرع الراكة بالخبر (تعارض). المصادر: https://linkedin.com/in/abdullah-a-al-arfaj-mba-cert-dir-74850b60 ; https://franchisemarket.co/dose-cafe/ ; https://linkedin.com/company/dose-cafe</td>
+  <td class="src" data-label="المصدر"><a href="https://saudiarestaurants.com/%D8%AF%D9%88%D8%B2-%D9%83%D8%A7%D9%81%D9%8A%D9%87-dose-cafe/" target="_blank" rel="noopener">[1]</a> <a href="https://soordb.com/en/bikarinteriors" target="_blank" rel="noopener">[2]</a></td>
 </tr></tbody>
   </table></div>
 </section>
